@@ -15,3 +15,11 @@ https://teratail.com/questions/318737
 https://qiita.com/yk2220s/items/8ed4d781412f6c4e9c45
 
 https://fullcalendar.io/
+
+https://qiita.com/TakeshiNickOsanai/items/7eed1ca8b9e482d392bc
+
+https://zenn.dev/uttk/articles/f48fc75120f018
+
+https://zenn.dev/maztak/articles/e72a5a38435af7
+
+https://console.firebase.google.com/project/next-translation/settings/iam

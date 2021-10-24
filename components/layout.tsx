@@ -1,15 +1,15 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import Link from 'next/link'
 
 export const siteTitle = 'Nu-Stack | フロントエンドエンジニアポートフォリオサイト';
+
 
 export default function Layout({ children, home
   }: {
     children: React.ReactNode
     home?: boolean
   }) {
-  return (
+    return (
     <div>
       <Head>
         <link rel="icon" href="/favicon.ico" />
