@@ -14,11 +14,24 @@ const LoginPage: NextPage = () => {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const onSubmit = async (event: FormEvent) => {
     event.preventDefault(); // デフォルトの<form />の挙動を無効にする
-    await login(email, password); // email・passwordを使ってログイン
-　　 router.push("/"); // ダッシュボードページへ遷移させる
+
+    if( email != null && password != null ) {
+      try {
+        await login(email, password); // email・passwordを使ってログイン
+        router.push("/"); //トップページへ遷移させる
+      } catch( err ) {
+        alert('ログイン情報が正しくありません');
+      }
+    } else {
+      if(email == '') {
+        alert('emailを入力してください。');
+      }
+      if(password == '') {
+        alert('passwordを入力してください。');
+      }  
+    }
   };
 
   return (
@@ -31,7 +44,6 @@ const LoginPage: NextPage = () => {
         </Head>
       <div>
         <h1>ログイン画面</h1>
-
         <form onSubmit={onSubmit}>
           <div>
             <label htmlFor="email">Email:</label>

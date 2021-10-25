@@ -1,25 +1,18 @@
 import type { GetServerSideProps, NextPage } from "next";
-
 import nookies from "nookies";
 import { useRouter } from "next/router";
+import { firebaseAdmin } from "../firebaseAdmin";
+import Link from 'next/link'
 
-import { logout } from "../utils/firebase"; // 上記で実装したファイル
-import { firebaseAdmin } from "../firebaseAdmin"; // この後に実装するファイル
-
-const DashboardPage: NextPage<{ email: string }> = ({ email }) => {
+const IndexPage: NextPage<{ email: string }> = ({ email }) => {
   const router = useRouter();
 
-  const onLogout = async () => {
-    await logout(); // ログアウトさせる
-    router.push("/login"); // ログインページへ遷移させる
-  };
-
   return (
-    <div>
-      <h1>Dashboard Pages</h1>
-      <h2>email: {email}</h2>
-      <button onClick={onLogout}>Logout</button>
-    </div>
+    <>
+      <Link href="/login">ログイン</Link>
+      <Link href="/customer">会員登録</Link>
+      <Link href=""><a href="https://uemu-engineer.com/" target="_blank" rel="noreferrer">Nu-stack</a></Link>
+    </>
   );
 };
 
@@ -36,13 +29,11 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     // 認証情報が無い場合は、ログイン画面へ遷移させる
     if (!user) {
       return {
-        redirect: {
-          destination: "/login",
-          permanent: false,
+        props: {
+          email: 'ゲスト',
         },
       };
     }
-  
     return {
       props: {
         email: user.email,
@@ -50,4 +41,4 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     };
   };
 
-export default DashboardPage;
+export default IndexPage;

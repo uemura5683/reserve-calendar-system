@@ -3,11 +3,9 @@ import Link from 'next/link'
 
 export const siteTitle = 'Nu-Stack | フロントエンドエンジニアポートフォリオサイト';
 
-
-export default function Layout({ children, home
+function Layout({ children
   }: {
     children: React.ReactNode
-    home?: boolean
   }) {
     return (
     <div>
@@ -29,21 +27,17 @@ export default function Layout({ children, home
         <div className="header--link">
           <Link href="/login">ログイン</Link>
           <Link href="/customer">会員登録</Link>
-          <Link href="/company">会社概要</Link>
-          <Link href="/contact">お問い合わせ</Link>
           <Link href=""><a href="https://uemu-engineer.com/" target="_blank" rel="noreferrer">Nu-stack</a></Link>
         </div>
       </header>
       <main>{children}</main>
       <footer>
         <div className="footer--inner">
-          <div className="footer--link__privacy">
-            <Link href="/privacy">プライバシーポリシー</Link>
-            <Link href="/company">会社概要</Link>
-          </div>
-          <div className="footer--copyrights"></div>
+          <div className="footer--copyrights">***********</div>
         </div>
       </footer>
     </div>
   )
 }
+
+export default Layout

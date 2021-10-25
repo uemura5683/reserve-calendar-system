@@ -1,10 +1,9 @@
 import type { GetServerSideProps } from "next";
-import nookies from "nookies";
-import { firebaseAdmin } from "../firebaseAdmin"; // この後に実装するファイル
-
 import Head from 'next/head'
 import Layout from "../components/layout";
 
+import nookies from "nookies";
+import { firebaseAdmin } from "../firebaseAdmin";
 
 import FullCalendar from "@fullcalendar/react";
 import interactionPlugin from "@fullcalendar/interaction";
@@ -15,7 +14,6 @@ import "@fullcalendar/daygrid/main.css";
 import "@fullcalendar/timegrid/main.css";
 
 import styles from '../styles/Calendar.module.css'
-
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const cookies = nookies.get(ctx);
