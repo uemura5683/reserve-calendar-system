@@ -11,13 +11,14 @@ import { firebaseAdmin } from "../firebaseAdmin";
 
 import styles from '../styles/Home.module.css'
 
-const IndexPage: NextPage<{ user: any }> = (user) => {
+const Mypage: NextPage<{ user: any }> = ({ user }) => {
   const router = useRouter();
 
   const onLogout = async () => {
     await logout(); // ログアウトさせる
     router.push("/logout"); // ログインページへ遷移させる
   };
+  
   return (
     <Layout>
       <Head>
@@ -27,7 +28,7 @@ const IndexPage: NextPage<{ user: any }> = (user) => {
       </Head>
       <div className={styles.container}>
         <nav>
-          {user.user ? (
+          {user ? (
               <>
                 <a onClick={onLogout}>ログアウト</a>
                 <Link href="/mypage">マイページ</Link>
@@ -42,12 +43,11 @@ const IndexPage: NextPage<{ user: any }> = (user) => {
         </nav>
         <main className={styles.main}>
           <h2 className={styles.title}>予約管理システム</h2>
-          <p>
-            このサイトは●●●●の予約管理ツールです。
-          </p>
-          <Link href="/calendar">
-            予約する
-          </Link>
+          { user ? (
+            <>
+              <h3>こんにちは {user.email}様</h3>
+            </>
+          ) : null }
         </main>
       </div>
     </Layout>
@@ -68,7 +68,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     // 認証情報が無い場合は、ログイン画面へ遷移させる
     if (!user) {
       return {
-        props: {
+        redirect: {
+          destination: "/login",
+          permanent: false,
           user: null
         },
       };
@@ -80,4 +82,4 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   };
 
-export default IndexPage;
+export default Mypage;

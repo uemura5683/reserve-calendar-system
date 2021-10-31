@@ -1,6 +1,5 @@
 import Head from 'next/head'
 import Link from 'next/link'
-
 export const siteTitle = 'Nu-Stack | フロントエンドエンジニアポートフォリオサイト';
 
 function Layout({ children
@@ -21,14 +20,10 @@ function Layout({ children
         />
         <meta name="og:title" content={siteTitle} />
         <meta name="twitter:card" content="summary_large_image" />
+        <link rel="stylesheet" href="/styles/foundation/base.css"></link>
       </Head>
       <header>
-        <h1 className="logo">予約管理システム</h1>
-        <div className="header--link">
-          <Link href="/login">ログイン</Link>
-          <Link href="/customer">会員登録</Link>
-          <Link href=""><a href="https://uemu-engineer.com/" target="_blank" rel="noreferrer">Nu-stack</a></Link>
-        </div>
+        <h1 className="logo"><Link href="/">予約管理システム</Link></h1>
       </header>
       <main>{children}</main>
       <footer>

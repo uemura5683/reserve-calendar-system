@@ -23,3 +23,9 @@ https://zenn.dev/uttk/articles/f48fc75120f018
 https://zenn.dev/maztak/articles/e72a5a38435af7
 
 https://console.firebase.google.com/project/next-translation/settings/iam
+
+https://qiita.com/d0ne1s/items/066d8ced7bb3ac3ce05b
+
+https://javascript.tutorialink.com/firebase-login-check-if-email-in-use/
+
+https://log.pocka.io/ja/posts/typescript-builtin-type-functions/

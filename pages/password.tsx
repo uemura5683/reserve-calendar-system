@@ -10,11 +10,11 @@ import { useRouter } from "next/router";
 import nookies from "nookies";
 
 import { firebaseAdmin } from "../firebaseAdmin";
-import { login, logout } from "../utils/firebase";
+import { logout } from "../utils/firebase";
 
 import styles from '../styles/Login.module.css'
 
-const LoginPage: NextPage<{ user: any }> = (user) => {
+const LoginPage: NextPage<{ user: any }> = ({ user }) => {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -28,7 +28,7 @@ const LoginPage: NextPage<{ user: any }> = (user) => {
 
     if( email != null && password != null ) {
       try {
-        await login(email, password); // email・passwordを使ってログイン
+        // await login(email, password); // email・passwordを使ってログイン
         router.push("/"); //トップページへ遷移させる
       } catch( err ) {
         alert('ログイン情報が正しくありません');
@@ -51,7 +51,7 @@ const LoginPage: NextPage<{ user: any }> = (user) => {
       </Head>
       <div className={styles.container}>
         <nav>
-          {user.user ? (
+          {user ? (
               <>
                 <a onClick={onLogout}>ログアウト</a>
                 <Link href="/mypage">マイページ</Link>
@@ -64,10 +64,11 @@ const LoginPage: NextPage<{ user: any }> = (user) => {
           ) }
           <Link href=""><a href="https://uemu-engineer.com/" target="_blank" rel="noreferrer">Nu-stack</a></Link>
         </nav>
-        <h2>ログイン</h2>
+        <h2>パスワードリマインダー</h2>
         <form onSubmit={onSubmit}>
           <div>
             <label htmlFor="email">Email:</label>
+
             <input
               id="email"
               value={email}
@@ -83,8 +84,7 @@ const LoginPage: NextPage<{ user: any }> = (user) => {
               onInput={(e) => setPassword(e.currentTarget.value)}
             />
           </div>
-          <button type="submit">login</button>
-          <Link href="/password">パスワードお忘れの方はこちら</Link>
+          <button type="submit">送信する</button>
         </form>
       </div>
     </Layout>
