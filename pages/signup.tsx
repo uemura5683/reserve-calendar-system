@@ -9,7 +9,7 @@ import type { GetServerSideProps, NextPage } from "next";
 import nookies from "nookies";
 
 import { firebaseAdmin } from "../firebaseAdmin";
-import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { getFirebaseAuth, logout } from '../utils/firebase'
 
 import styles from '../styles/Customer.module.css'

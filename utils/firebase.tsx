@@ -2,7 +2,7 @@ import type { FirebaseApp } from "firebase/app";
 import type { Auth as FirebaseAuth } from "firebase/auth";
 
 import { getApps, initializeApp } from "firebase/app";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail } from "firebase/auth";
 
 /**
  * @description Firebaseの管理画面から取得したAPIオブジェクト
@@ -60,3 +60,22 @@ export const logout = async () => {
   await fetch("/api/sessionLogout", { method: "POST" });
 };
 
+/**
+ * @description パスワードリマインど
+ */
+ export const password = async (email: string) => {
+  // FirebaseAuthを取得する
+  const auth = getFirebaseAuth();
+
+  // メールアドレスとパスワードでログインする
+  await sendPasswordResetEmail(auth, email)
+          .then((resp) => {
+            // メール送信成功
+            console.log(resp);
+          })
+          .catch((error) => {
+            // メール送信失敗
+            console.log(error)
+          })
+
+};

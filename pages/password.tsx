@@ -10,14 +10,13 @@ import { useRouter } from "next/router";
 import nookies from "nookies";
 
 import { firebaseAdmin } from "../firebaseAdmin";
-import { logout } from "../utils/firebase";
+import { getFirebaseAuth, password,logout } from "../utils/firebase";
 
 import styles from '../styles/Login.module.css'
 
 const LoginPage: NextPage<{ user: any }> = ({ user }) => {
   const router = useRouter();
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
 
   const onLogout = async () => {
     await logout(); // ログアウトさせる
@@ -25,21 +24,18 @@ const LoginPage: NextPage<{ user: any }> = ({ user }) => {
 
   const onSubmit = async (event: FormEvent) => {
     event.preventDefault(); // デフォルトの<form />の挙動を無効にする
-
-    if( email != null && password != null ) {
+    let auth = getFirebaseAuth();
+    if( email != null ) {
       try {
-        // await login(email, password); // email・passwordを使ってログイン
-        router.push("/"); //トップページへ遷移させる
+        await password(email); // email・passwordを使ってログイン
+        router.push("/passwordreset"); //トップページへ遷移させる
       } catch( err ) {
-        alert('ログイン情報が正しくありません');
+        alert('email情報が正しくありません');
       }
     } else {
       if(email == '') {
         alert('emailを入力してください。');
       }
-      if(password == '') {
-        alert('passwordを入力してください。');
-      }  
     }
   };
   return (
@@ -73,15 +69,6 @@ const LoginPage: NextPage<{ user: any }> = ({ user }) => {
               id="email"
               value={email}
               onInput={(e) => setEmail(e.currentTarget.value)}
-            />
-          </div>
-          <div>
-            <label htmlFor="password">Password:</label>
-            <input
-              id="password"
-              type="password"
-              value={password}
-              onInput={(e) => setPassword(e.currentTarget.value)}
             />
           </div>
           <button type="submit">送信する</button>
