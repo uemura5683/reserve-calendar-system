@@ -16,7 +16,7 @@ const IndexPage: NextPage<{ user: any }> = (user) => {
 
   const onLogout = async () => {
     await logout(); // ログアウトさせる
-    router.push("/logout"); // ログインページへ遷移させる
+    router.push("/customer/logout"); // ログインページへ遷移させる
   };
   return (
     <Layout>
@@ -30,12 +30,12 @@ const IndexPage: NextPage<{ user: any }> = (user) => {
           {user.user ? (
               <>
                 <a onClick={onLogout}>ログアウト</a>
-                <Link href="/mypage">マイページ</Link>
+                <Link href="/mypage/">マイページ</Link>
               </>
             ) : (
               <>
-                <Link href="/login">ログイン</Link>
-                <Link href="/signup">会員登録</Link>
+                <Link href="/customer/login">ログイン</Link>
+                <Link href="/customer/signup">会員登録</Link>
               </>
           ) }
           <Link href=""><a href="https://uemu-engineer.com/" target="_blank" rel="noreferrer">Nu-stack</a></Link>
@@ -45,7 +45,7 @@ const IndexPage: NextPage<{ user: any }> = (user) => {
           <p>
             このサイトは●●●●の予約管理ツールです。
           </p>
-          <Link href="/calendar">
+          <Link href="/order/calendar">
             予約する
           </Link>
         </main>

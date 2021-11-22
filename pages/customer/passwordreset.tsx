@@ -1,22 +1,22 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import Layout from "../components/layout";
+import Layout from "../../components/layout";
 
 import type { GetServerSideProps, NextPage } from "next";
 import nookies from "nookies";
 import { useRouter } from "next/router";
 
-import { logout} from "../utils/firebase";
-import { firebaseAdmin } from "../firebaseAdmin";
+import { logout} from "../../utils/firebase";
+import { firebaseAdmin } from "../../firebaseAdmin";
 
-import styles from '../styles/Home.module.css'
+import styles from '../../styles/Home.module.css'
 
 const EntryComplete: NextPage<{ user: any }> = (user) => {
   const router = useRouter();
 
   const onLogout = async () => {
     await logout(); // ログアウトさせる
-    router.push("/logout"); // ログインページへ遷移させる
+    router.push("/customer/logout"); // ログインページへ遷移させる
   };
   return (
     <Layout>
@@ -30,23 +30,23 @@ const EntryComplete: NextPage<{ user: any }> = (user) => {
           {user.user ? (
               <>
                 <a onClick={onLogout}>ログアウト</a>
-                <Link href="/mypage">マイページ</Link>
+                <Link href="/mypage/">マイページ</Link>
               </>
             ) : (
               <>
-                <Link href="/login">ログイン</Link>
-                <Link href="/signup">会員登録</Link>
+                <Link href="/customer/login">ログイン</Link>
+                <Link href="/customer/signup">会員登録</Link>
               </>
           ) }
           <Link href=""><a href="https://uemu-engineer.com/" target="_blank" rel="noreferrer">Nu-stack</a></Link>
         </nav>
         <main className={styles.main}>
-          <h2 className={styles.title}>登録完了</h2>
+          <h2 className={styles.title}>パスワード再設定</h2>
           <p>
-            登録ありがとうございました！
+            パスワードリセット完了しました。
           </p>
-          <Link href="/login">
-            ログインする
+          <Link href="/">
+            トップへ
           </Link>
         </main>
       </div>

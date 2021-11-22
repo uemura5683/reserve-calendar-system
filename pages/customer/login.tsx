@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import Layout from "../components/layout";
+import Layout from "../../components/layout";
 
 import { useState } from "react";
 import type { FormEvent } from "react";
@@ -9,14 +9,15 @@ import type { GetServerSideProps, NextPage } from "next";
 import { useRouter } from "next/router";
 import nookies from "nookies";
 
-import { firebaseAdmin } from "../firebaseAdmin";
-import { getFirebaseAuth, password,logout } from "../utils/firebase";
+import { firebaseAdmin } from "../../firebaseAdmin";
+import { login, logout } from "../../utils/firebase";
 
-import styles from '../styles/Login.module.css'
+import styles from '../../styles/Login.module.css'
 
-const LoginPage: NextPage<{ user: any }> = ({ user }) => {
+const LoginPage: NextPage<{ user: any }> = (user) => {
   const router = useRouter();
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const onLogout = async () => {
     await logout(); // ログアウトさせる
@@ -24,18 +25,21 @@ const LoginPage: NextPage<{ user: any }> = ({ user }) => {
 
   const onSubmit = async (event: FormEvent) => {
     event.preventDefault(); // デフォルトの<form />の挙動を無効にする
-    let auth = getFirebaseAuth();
-    if( email != null ) {
+
+    if( email != null && password != null ) {
       try {
-        await password(email); // email・passwordを使ってログイン
-        router.push("/passwordreset"); //トップページへ遷移させる
+        await login(email, password); // email・passwordを使ってログイン
+        router.push("/"); //トップページへ遷移させる
       } catch( err ) {
-        alert('email情報が正しくありません');
+        alert('ログイン情報が正しくありません');
       }
     } else {
       if(email == '') {
         alert('emailを入力してください。');
       }
+      if(password == '') {
+        alert('passwordを入力してください。');
+      }  
     }
   };
   return (
@@ -47,31 +51,40 @@ const LoginPage: NextPage<{ user: any }> = ({ user }) => {
       </Head>
       <div className={styles.container}>
         <nav>
-          {user ? (
+          {user.user ? (
               <>
                 <a onClick={onLogout}>ログアウト</a>
-                <Link href="/mypage">マイページ</Link>
+                <Link href="/mypage/">マイページ</Link>
               </>
             ) : (
               <>
-                <Link href="/login">ログイン</Link>
-                <Link href="/signup">会員登録</Link>
+                <Link href="/customer/login">ログイン</Link>
+                <Link href="/customer/signup">会員登録</Link>
               </>
           ) }
           <Link href=""><a href="https://uemu-engineer.com/" target="_blank" rel="noreferrer">Nu-stack</a></Link>
         </nav>
-        <h2>パスワードリマインダー</h2>
+        <h2>ログイン</h2>
         <form onSubmit={onSubmit}>
           <div>
             <label htmlFor="email">Email:</label>
-
             <input
               id="email"
               value={email}
               onInput={(e) => setEmail(e.currentTarget.value)}
             />
           </div>
-          <button type="submit">送信する</button>
+          <div>
+            <label htmlFor="password">Password:</label>
+            <input
+              id="password"
+              type="password"
+              value={password}
+              onInput={(e) => setPassword(e.currentTarget.value)}
+            />
+          </div>
+          <button type="submit">login</button>
+          <Link href="/password">パスワードお忘れの方はこちら</Link>
         </form>
       </div>
     </Layout>

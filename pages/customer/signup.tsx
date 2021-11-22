@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import Layout from "../components/layout";
+import Layout from "../../components/layout";
 
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/router";
@@ -8,11 +8,11 @@ import { useRouter } from "next/router";
 import type { GetServerSideProps, NextPage } from "next";
 import nookies from "nookies";
 
-import { firebaseAdmin } from "../firebaseAdmin";
+import { firebaseAdmin } from "../../firebaseAdmin";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { getFirebaseAuth, logout } from '../utils/firebase'
+import { getFirebaseAuth, logout } from '../../utils/firebase'
 
-import styles from '../styles/Customer.module.css'
+import styles from '../../styles/Customer.module.css'
 
 
 const SignUp: NextPage<{ user: any }> = ({ user }) => {
@@ -23,7 +23,7 @@ const SignUp: NextPage<{ user: any }> = ({ user }) => {
 
   const onLogout = async () => {
     await logout(); // ログアウトさせる
-    router.push("/logout"); // ログインページへ遷移させる
+    router.push("/customer/logout"); // ログインページへ遷移させる
   };
 
   const createUser = async (event: FormEvent) => {
@@ -31,7 +31,7 @@ const SignUp: NextPage<{ user: any }> = ({ user }) => {
     try {
       console.log(auth);
       await createUserWithEmailAndPassword(auth, email, password);
-      router.push('/entry_complete')
+      router.push('/customer/complete')
     } catch (err: any) {
        alert(err.message);
     }
@@ -49,12 +49,12 @@ const SignUp: NextPage<{ user: any }> = ({ user }) => {
         {user ? (
               <>
                 <a onClick={onLogout}>ログアウト</a>
-                <Link href="/mypage">マイページ</Link>
+                <Link href="/mypage/">マイページ</Link>
               </>
             ) : (
               <>
-                <Link href="/login">ログイン</Link>
-                <Link href="/signup">会員登録</Link>
+                <Link href="/customer/login">ログイン</Link>
+                <Link href="/customer/signup">会員登録</Link>
               </>
           ) }
           <Link href=""><a href="https://uemu-engineer.com/" target="_blank" rel="noreferrer">Nu-stack</a></Link>
