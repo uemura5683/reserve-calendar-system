@@ -10,13 +10,13 @@ import { useRouter } from "next/router";
 import nookies from "nookies";
 
 import { firebaseAdmin } from "../../firebaseAdmin";
-import { getFirebaseAuth, password,logout } from "../../utils/firebase";
+import { getFirebaseAuth, passwordupdate, logout } from "../../utils/firebase";
 
 import styles from '../../styles/Login.module.css'
 
 const LoginPage: NextPage<{ user: any }> = ({ user }) => {
   const router = useRouter();
-  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const onLogout = async () => {
     await logout(); // ログアウトさせる
@@ -25,16 +25,16 @@ const LoginPage: NextPage<{ user: any }> = ({ user }) => {
   const onSubmit = async (event: FormEvent) => {
     event.preventDefault(); // デフォルトの<form />の挙動を無効にする
     let auth = getFirebaseAuth();
-    if( email != null ) {
+    if( password != null ) {
       try {
-        await password(email); // email・passwordを使ってログイン
-        router.push("/customer/passwordreset"); //トップページへ遷移させる
+        passwordupdate(auth, password);
+        router.push("/mypage/passwordreset"); //トップページへ遷移させる
       } catch( err ) {
-        alert('email情報が正しくありません');
+        alert('送信失敗しました。');
       }
     } else {
-      if(email == '') {
-        alert('emailを入力してください。');
+      if(password == '') {
+        alert('パスワードを入力してください。');
       }
     }
   };
@@ -60,15 +60,15 @@ const LoginPage: NextPage<{ user: any }> = ({ user }) => {
           ) }
           <Link href=""><a href="https://uemu-engineer.com/" target="_blank" rel="noreferrer">Nu-stack</a></Link>
         </nav>
-        <h2>パスワードリマインダー</h2>
+        <h2>パスワード変更</h2>
         <form onSubmit={onSubmit}>
           <div>
-            <label htmlFor="email">Email:</label>
+            <label htmlFor="password">password:</label>
 
             <input
-              id="email"
-              value={email}
-              onInput={(e) => setEmail(e.currentTarget.value)}
+              id="password"
+              value={password}
+              onInput={(e) => setPassword(e.currentTarget.value)}
             />
           </div>
           <button type="submit">送信する</button>

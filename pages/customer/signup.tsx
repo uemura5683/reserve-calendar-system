@@ -29,7 +29,6 @@ const SignUp: NextPage<{ user: any }> = ({ user }) => {
   const createUser = async (event: FormEvent) => {
     event.preventDefault()
     try {
-      console.log(auth);
       await createUserWithEmailAndPassword(auth, email, password);
       router.push('/customer/complete')
     } catch (err: any) {

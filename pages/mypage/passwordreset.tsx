@@ -11,14 +11,13 @@ import { firebaseAdmin } from "../../firebaseAdmin";
 
 import styles from '../../styles/Home.module.css'
 
-const Mypage: NextPage<{ user: any }> = ({ user }) => {
+const EntryComplete: NextPage<{ user: any }> = (user) => {
   const router = useRouter();
 
   const onLogout = async () => {
     await logout(); // ログアウトさせる
     router.push("/customer/logout"); // ログインページへ遷移させる
   };
-  
   return (
     <Layout>
       <Head>
@@ -28,7 +27,7 @@ const Mypage: NextPage<{ user: any }> = ({ user }) => {
       </Head>
       <div className={styles.container}>
         <nav>
-          {user ? (
+          {user.user ? (
               <>
                 <a onClick={onLogout}>ログアウト</a>
                 <Link href="/mypage/">マイページ</Link>
@@ -42,19 +41,13 @@ const Mypage: NextPage<{ user: any }> = ({ user }) => {
           <Link href=""><a href="https://uemu-engineer.com/" target="_blank" rel="noreferrer">Nu-stack</a></Link>
         </nav>
         <main className={styles.main}>
-          <h2 className={styles.title}>予約管理システム</h2>
-          { user ? (
-            <>
-              <h3>こんにちは {user.email}様</h3>
-            </>
-          ) : null }
-          <div className={styles.content}>
-            <ul>
-              <li><Link href="/">予約状況</Link></li>
-              <li><Link href="/">メールアドレス変更</Link></li>
-              <li><Link href="/mypage/password">パスワード変更</Link></li>           
-            </ul>
-          </div>
+          <h2 className={styles.title}>パスワード変更</h2>
+          <p>
+            パスワードリセット完了しました。
+          </p>
+          <Link href="/">
+            トップへ
+          </Link>
         </main>
       </div>
     </Layout>
@@ -75,9 +68,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     // 認証情報が無い場合は、ログイン画面へ遷移させる
     if (!user) {
       return {
-        redirect: {
-          destination: "/login",
-          permanent: false,
+        props: {
           user: null
         },
       };
@@ -89,4 +80,4 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   };
 
-export default Mypage;
+export default EntryComplete;

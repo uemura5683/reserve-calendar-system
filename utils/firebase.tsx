@@ -2,7 +2,7 @@ import type { FirebaseApp } from "firebase/app";
 import type { Auth as FirebaseAuth } from "firebase/auth";
 
 import { getApps, initializeApp } from "firebase/app";
-import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail, updatePassword, reauthenticateWithCredential } from "firebase/auth";
 
 /**
  * @description Firebaseの管理画面から取得したAPIオブジェクト
@@ -60,8 +60,39 @@ export const logout = async () => {
   await fetch("/api/sessionLogout", { method: "POST" });
 };
 
+// /**
+//  * 
+//  * @param auth:any
+//  * @param email: string
+//  * https://firebase.google.com/docs/auth/web/manage-users?hl=ja
+//  */
+// export const emailUpdate = async (auth: any, newemail: string) => {
+//   const user = auth.currentUser;
+//   await reauthenticateWithCredential(user, newemail).then(() => {
+//     console.log('成功しました')
+//   }).catch((error) => {
+//     console.log(error);
+//   });
+// }
+
 /**
- * @description パスワードリマインど
+ * @param auth: any
+ * @param password:string
+ * https://blog.ojisan.io/firebase-auth-ipass-login/
+ * https://firebase.google.com/docs/auth/web/manage-users?hl=ja#set_a_users_password
+ */
+ export const passwordupdate = async (auth: any, password: string) => {
+  // FirebaseAuthを取得する
+  const user = auth.currentUser;
+  await updatePassword(user, password).then(() => {
+    console.log('成功しました')
+  }).catch((error) => {
+    console.log(error);
+  });
+};
+
+/**
+ * @description パスワードリマインダー
  */
  export const password = async (email: string) => {
   // FirebaseAuthを取得する

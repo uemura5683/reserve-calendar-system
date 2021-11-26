@@ -41,7 +41,7 @@ const EntryComplete: NextPage<{ user: any }> = (user) => {
           <Link href=""><a href="https://uemu-engineer.com/" target="_blank" rel="noreferrer">Nu-stack</a></Link>
         </nav>
         <main className={styles.main}>
-          <h2 className={styles.title}>パスワード再設定</h2>
+          <h2 className={styles.title}>パスワードリマインダー</h2>
           <p>
             パスワードリセット完了しました。
           </p>
