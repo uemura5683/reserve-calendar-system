@@ -9,7 +9,7 @@ import { useRouter } from "next/router";
 import { logout} from "../../utils/firebase";
 import { firebaseAdmin } from "../../firebaseAdmin";
 
-import styles from '../../styles/Home.module.css'
+import styles from '../../styles/Mypage.module.css'
 
 const EntryComplete: NextPage<{ user: any }> = (user) => {
   const router = useRouter();
@@ -26,7 +26,7 @@ const EntryComplete: NextPage<{ user: any }> = (user) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className={styles.container}>
-        <nav>
+        <nav className={styles.nav}>
           {user.user ? (
               <>
                 <a onClick={onLogout}>ログアウト</a>
@@ -41,9 +41,9 @@ const EntryComplete: NextPage<{ user: any }> = (user) => {
           <Link href=""><a href="https://uemu-engineer.com/" target="_blank" rel="noreferrer">Nu-stack</a></Link>
         </nav>
         <main className={styles.main}>
-          <h2 className={styles.title}>パスワード変更</h2>
+          <h2 className={styles.title}>メールアドレス変更</h2>
           <p>
-            パスワードリセット完了しました。
+            メールアドレス変更完了しました。
           </p>
           <Link href="/">
             トップへ

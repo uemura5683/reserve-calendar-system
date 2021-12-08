@@ -12,7 +12,7 @@ import nookies from "nookies";
 import { firebaseAdmin } from "../../firebaseAdmin";
 import { login, logout } from "../../utils/firebase";
 
-import styles from '../../styles/Login.module.css'
+import styles from '../../styles/Customer.module.css'
 
 const LoginPage: NextPage<{ user: any }> = (user) => {
   const router = useRouter();
@@ -50,7 +50,7 @@ const LoginPage: NextPage<{ user: any }> = (user) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className={styles.container}>
-        <nav>
+        <nav className={styles.nav}>
           {user.user ? (
               <>
                 <a onClick={onLogout}>ログアウト</a>
@@ -64,27 +64,29 @@ const LoginPage: NextPage<{ user: any }> = (user) => {
           ) }
           <Link href=""><a href="https://uemu-engineer.com/" target="_blank" rel="noreferrer">Nu-stack</a></Link>
         </nav>
-        <h2>ログイン</h2>
+        <h2 className={styles.title}>ログイン</h2>
         <form onSubmit={onSubmit}>
-          <div>
-            <label htmlFor="email">Email:</label>
-            <input
-              id="email"
-              value={email}
-              onInput={(e) => setEmail(e.currentTarget.value)}
-            />
-          </div>
-          <div>
+          <div className="form-contnt">
+            <div className="label-content">
+              <label htmlFor="email">Email:</label>
+              <input
+                id="email"
+                value={email}
+                onInput={(e) => setEmail(e.currentTarget.value)}
+              />
+            </div>
+            <div className="label-content">
             <label htmlFor="password">Password:</label>
-            <input
-              id="password"
-              type="password"
-              value={password}
-              onInput={(e) => setPassword(e.currentTarget.value)}
-            />
+              <input
+                id="password"
+                type="password"
+                value={password}
+                onInput={(e) => setPassword(e.currentTarget.value)}
+              />
+            </div>
+            <button type="submit">login</button>
+            <Link href="/customer/password">パスワードお忘れの方はこちら</Link>
           </div>
-          <button type="submit">login</button>
-          <Link href="/password">パスワードお忘れの方はこちら</Link>
         </form>
       </div>
     </Layout>

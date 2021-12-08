@@ -1,17 +1,17 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import Layout from "../components/layout";
+import Layout from "../../components/layout";
 
 import type { GetServerSideProps, NextPage } from "next";
 import nookies from "nookies";
 import { useRouter } from "next/router";
 
-import { logout} from "../utils/firebase";
-import { firebaseAdmin } from "../firebaseAdmin";
+import { logout} from "../../utils/firebase";
+import { firebaseAdmin } from "../../firebaseAdmin";
 
-import styles from '../styles/Home.module.css'
+import styles from '../../styles/Customer.module.css'
 
-const IndexPage: NextPage<{ user: any }> = (user) => {
+const EntryComplete: NextPage<{ user: any }> = (user) => {
   const router = useRouter();
 
   const onLogout = async () => {
@@ -41,12 +41,12 @@ const IndexPage: NextPage<{ user: any }> = (user) => {
           <Link href=""><a href="https://uemu-engineer.com/" target="_blank" rel="noreferrer">Nu-stack</a></Link>
         </nav>
         <main className={styles.main}>
-          <h2 className={styles.title}>予約管理システム</h2>
+          <h2 className={styles.title}>パスワードリマインダー</h2>
           <p>
-            このサイトは●●●●の予約管理ツールです。
+            パスワードリセット完了しました。
           </p>
-          <Link href="/order/calendar">
-            予約する
+          <Link href="/">
+            トップへ
           </Link>
         </main>
       </div>
@@ -80,4 +80,4 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   };
 
-export default IndexPage;
+export default EntryComplete;

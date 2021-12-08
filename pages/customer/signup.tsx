@@ -30,7 +30,7 @@ const SignUp: NextPage<{ user: any }> = ({ user }) => {
     event.preventDefault()
     try {
       await createUserWithEmailAndPassword(auth, email, password);
-      router.push('/customer/complete')
+      router.push('/customer/signupcomplete')
     } catch (err: any) {
        alert(err.message);
     }
@@ -44,7 +44,7 @@ const SignUp: NextPage<{ user: any }> = ({ user }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className={styles.container}>
-        <nav>
+        <nav className={styles.nav}>
         {user ? (
               <>
                 <a onClick={onLogout}>ログアウト</a>
@@ -58,33 +58,35 @@ const SignUp: NextPage<{ user: any }> = ({ user }) => {
           ) }
           <Link href=""><a href="https://uemu-engineer.com/" target="_blank" rel="noreferrer">Nu-stack</a></Link>
         </nav>
-        <h1>新規会員登録</h1>
+        <h2 className={styles.title}>新規会員登録</h2>
         <form className="auth" onSubmit={createUser}>
-            <div>
-            <label htmlFor="email" className="auth-label">
-                Email:{' '}
-            </label>
-            <input
-                id="email"
-                className="auth-input"
-                type="email"
-                onChange={(e) => setEmail(e.target.value)}
-            />
+            <div className="form-contnt">
+              <div className="label-content">
+                <label htmlFor="email" className="auth-label">
+                    Email:{' '}
+                </label>
+                <input
+                    id="email"
+                    className="auth-input"
+                    type="email"
+                    onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
+              <div className="label-content">
+                <label htmlFor="password" className="auth-label">
+                    Password:{' '}
+                </label>
+                <input
+                    id="password"
+                    className="auth-input"
+                    type="password"
+                    onChange={(e) => setPassword(e.target.value)}
+                />
+              </div>
+              <button className="auth-btn" type="submit">
+                会員登録する
+              </button>
             </div>
-            <div className="mt-2">
-            <label htmlFor="password" className="auth-label">
-                Password:{' '}
-            </label>
-            <input
-                id="password"
-                className="auth-input"
-                type="password"
-                onChange={(e) => setPassword(e.target.value)}
-            />
-            </div>
-            <button className="auth-btn" type="submit">
-              会員登録する
-            </button>
         </form>
       </div>
     </Layout>    

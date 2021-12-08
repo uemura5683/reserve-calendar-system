@@ -1,13 +1,14 @@
 import Head from 'next/head'
 import Link from 'next/link'
 export const siteTitle = 'Nu-Stack | フロントエンドエンジニアポートフォリオサイト';
+import styles from '../styles/Common.module.css'
 
 function Layout({ children
   }: {
     children: React.ReactNode
   }) {
     return (
-    <div>
+    <div className={styles.wrapper}>
       <Head>
         <link rel="icon" href="/favicon.ico" />
         <meta
@@ -22,13 +23,13 @@ function Layout({ children
         <meta name="twitter:card" content="summary_large_image" />
         <link rel="stylesheet" href="/styles/foundation/base.css"></link>
       </Head>
-      <header>
-        <h1 className="logo"><Link href="/">予約管理システム</Link></h1>
+      <header className={styles.header}>
+        <h1 className={styles.headerlogo}><Link href="/">予約管理システム</Link></h1>
       </header>
-      <main>{children}</main>
-      <footer>
-        <div className="footer--inner">
-          <div className="footer--copyrights">***********</div>
+      <main className={styles.main}>{children}</main>
+      <footer className={styles.footer}>
+        <div className={styles.footerinner}>
+          <div className={styles.copyrignt}>***********</div>
         </div>
       </footer>
     </div>

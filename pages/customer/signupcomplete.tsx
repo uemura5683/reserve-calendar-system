@@ -26,7 +26,7 @@ const EntryComplete: NextPage<{ user: any }> = (user) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className={styles.container}>
-        <nav>
+        <nav className={styles.nav}>
           {user.user ? (
               <>
                 <a onClick={onLogout}>ログアウト</a>

@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import Layout from "../../components/layout";
+import { useCallback, useState } from "react";
 
 import type { GetServerSideProps, NextPage } from "next";
 import nookies from "nookies";
@@ -9,21 +10,38 @@ import { useRouter } from "next/router";
 import { firebaseAdmin } from "../../firebaseAdmin";
 import { logout} from "../../utils/firebase";
 
-import FullCalendar from "@fullcalendar/react";
+import FullCalendar, { DateSelectArg, EventApi } from "@fullcalendar/react";
 import interactionPlugin from "@fullcalendar/interaction";
 import timeGridPlugin from "@fullcalendar/timegrid";
+import { INITIAL_EVENTS, createEventId } from "../../utils/event-utils";
+
 import "@fullcalendar/common/main.css";
 import "@fullcalendar/daygrid/main.css";
 import "@fullcalendar/timegrid/main.css";
 
 import styles from '../../styles/Calendar.module.css'
 
-const Calendar: NextPage<{ user: any }> = ({ user }) => {
+const Calendarpage: NextPage<{ user: any }> = ({ user }) => {
 
   const onLogout = async () => {
     await logout(); // ログアウトさせる
     router.push("/customer/logout"); // ログインページへ遷移させる
   };
+
+  const handleDateSelect = useCallback((selectInfo: DateSelectArg) => {
+    let title = prompt("イベントのタイトルを入力してください")?.trim();
+    let calendarApi = selectInfo.view.calendar;
+    calendarApi.unselect();
+    if (title) {
+      calendarApi.addEvent({
+        id: createEventId(),
+        title,
+        start: selectInfo.startStr,
+        end: selectInfo.endStr,
+        allDay: selectInfo.allDay,
+      });
+    }
+  }, []);
 
   const router = useRouter();
   return (
@@ -34,7 +52,7 @@ const Calendar: NextPage<{ user: any }> = ({ user }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className={styles.container}>
-        <nav>
+        <nav className={styles.nav}>
           {user ? (
               <>
                 <a onClick={onLogout}>ログアウト</a>
@@ -48,13 +66,15 @@ const Calendar: NextPage<{ user: any }> = ({ user }) => {
           ) }
           <Link href=""><a href="https://uemu-engineer.com/" target="_blank" rel="noreferrer">Nu-stack</a></Link>
         </nav>
-        <h2>予約する</h2>
+        <h2 className={styles.title}>スケジュール一覧</h2>
         <FullCalendar
           plugins={[interactionPlugin, timeGridPlugin]}
           initialView="timeGridWeek"
           nowIndicator={true}
           editable={true}
-          initialEvents={[{ title: "Initial event", start: new Date() }]}
+          locale='ja'
+          businessHours={false}
+          initialEvents={INITIAL_EVENTS}
         />
       </div>
     </Layout>
@@ -87,4 +107,4 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   };
 };
 
-export default Calendar;
+export default Calendarpage;

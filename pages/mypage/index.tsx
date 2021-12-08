@@ -9,7 +9,7 @@ import { useRouter } from "next/router";
 import { logout} from "../../utils/firebase";
 import { firebaseAdmin } from "../../firebaseAdmin";
 
-import styles from '../../styles/Home.module.css'
+import styles from '../../styles/Mypage.module.css'
 
 const Mypage: NextPage<{ user: any }> = ({ user }) => {
   const router = useRouter();
@@ -27,7 +27,7 @@ const Mypage: NextPage<{ user: any }> = ({ user }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className={styles.container}>
-        <nav>
+        <nav className={styles.nav}>
           {user ? (
               <>
                 <a onClick={onLogout}>ログアウト</a>
@@ -51,7 +51,7 @@ const Mypage: NextPage<{ user: any }> = ({ user }) => {
           <div className={styles.content}>
             <ul>
               <li><Link href="/">予約状況</Link></li>
-              <li><Link href="/">メールアドレス変更</Link></li>
+              <li><Link href="/mypage/mailaddress">メールアドレス変更</Link></li>
               <li><Link href="/mypage/password">パスワード変更</Link></li>           
             </ul>
           </div>

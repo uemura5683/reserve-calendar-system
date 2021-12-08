@@ -2,7 +2,7 @@ import type { FirebaseApp } from "firebase/app";
 import type { Auth as FirebaseAuth } from "firebase/auth";
 
 import { getApps, initializeApp } from "firebase/app";
-import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail, updatePassword, reauthenticateWithCredential } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail, updatePassword, updateEmail } from "firebase/auth";
 
 /**
  * @description Firebaseの管理画面から取得したAPIオブジェクト
@@ -66,14 +66,14 @@ export const logout = async () => {
 //  * @param email: string
 //  * https://firebase.google.com/docs/auth/web/manage-users?hl=ja
 //  */
-// export const emailUpdate = async (auth: any, newemail: string) => {
-//   const user = auth.currentUser;
-//   await reauthenticateWithCredential(user, newemail).then(() => {
-//     console.log('成功しました')
-//   }).catch((error) => {
-//     console.log(error);
-//   });
-// }
+export const mailaddressupdate = async (auth: any, newemail: string) => {
+  const user = auth.currentUser;
+  await updateEmail(user, newemail).then(() => {
+    console.log('成功しました')
+  }).catch((error) => {
+    console.log(error);
+  });
+}
 
 /**
  * @param auth: any
@@ -100,13 +100,12 @@ export const logout = async () => {
 
   // メールアドレスとパスワードでログインする
   await sendPasswordResetEmail(auth, email)
-          .then((resp) => {
-            // メール送信成功
-            console.log(resp);
-          })
-          .catch((error) => {
-            // メール送信失敗
-            console.log(error)
-          })
-
-};
+    .then((resp) => {
+      // メール送信成功
+      console.log(resp);
+    })
+    .catch((error) => {
+      // メール送信失敗
+      console.log(error)
+    })
+  };
