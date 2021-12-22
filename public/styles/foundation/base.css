@@ -71,52 +71,29 @@ a:hover, a:focus {
 /**
  * form
  */ 
-input, input:focus, input:active, input:visited, input:hover,
-select, select:focus, select:active, select:visited, select:hover,
-textarea, textarea:focus, textarea:active, textarea:visited, textarea:hover,
-button, button:focus, button:active, button:visited, button:hover {
+input, input:focus, input:hover,
+select, select:focus, select:hover,
+textarea, textarea:focus, textarea:hover,
+button, button:focus, button:hover {
   border: none;
   outline: none;
   background: transparent;
   -webkit-box-shadow: none;
   box-shadow: none;
-  border: 1px solid white;
+  border: 1px solid #999999;
   background-color: white;
   transition: .3s all ease;
   width: auto;
 }
-button {
+button:not(.fc-button-primary), button:not(.fc-button-primary):hover, button:not(.fc-button-primary):focus {
   width: 100%;  
-  height: 30px;
+  height: 40px;
 }
-input, input:focus, input:active, input:visited, input:hover,
-textarea, textarea:focus, textarea:active, textarea:visited, textarea:hover {
-  height: 35px;
-  border: 1px solid #999999;
+input, input:focus, input:hover,
+textarea, textarea:focus, textarea:hover {
+  height: 40px;
   box-sizing: border-box;
   border-radius: 5px;
-}
-input:focus, input:active, input:visited, input:hover,
-select:focus, select:active, select:visited, select:hover,
-textarea:focus, textarea:active, textarea:visited, textarea:hover,
-button:focus, button:active, button:visited, button:hover,
-.btn:focus, .btn:active, .btn:visited, .btn:hover {
-  -webkit-box-shadow: 0 0 2px 2px white;
-          box-shadow: 0 0 2px 2px white;
-  border: 1px solid white;
-  transition: .3s all ease;  
-}
-.form-contnt {
-  text-align: center;
-  max-width: 500px;
-  display: flex;
-  flex-wrap: wrap;
-  margin: 0 auto;
-  justify-content: center;
-}
-.label-content {
-  margin: 0 0 10px;
-  width: 100%;
 }
 
 label {

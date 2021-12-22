@@ -19,7 +19,8 @@ import "@fullcalendar/common/main.css";
 import "@fullcalendar/daygrid/main.css";
 import "@fullcalendar/timegrid/main.css";
 
-import styles from '../../styles/Calendar.module.css'
+import stylecommon from '../../styles/Common.module.css'
+import stylecalendar from '../../styles/Calendar.module.css'
 
 const Calendarpage: NextPage<{ user: any }> = ({ user }) => {
 
@@ -51,8 +52,8 @@ const Calendarpage: NextPage<{ user: any }> = ({ user }) => {
         <meta name="description" content="Calendar" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className={styles.container}>
-        <nav className={styles.nav}>
+      <div className={stylecommon.container}>
+        <nav className={stylecommon.nav}>
           {user ? (
               <>
                 <a onClick={onLogout}>ログアウト</a>
@@ -66,16 +67,18 @@ const Calendarpage: NextPage<{ user: any }> = ({ user }) => {
           ) }
           <Link href=""><a href="https://uemu-engineer.com/" target="_blank" rel="noreferrer">Nu-stack</a></Link>
         </nav>
-        <h2 className={styles.title}>スケジュール一覧</h2>
-        <FullCalendar
-          plugins={[interactionPlugin, timeGridPlugin]}
-          initialView="timeGridWeek"
-          nowIndicator={true}
-          editable={true}
-          locale='ja'
-          businessHours={false}
-          initialEvents={INITIAL_EVENTS}
-        />
+        <h2 className={stylecommon.title}>スケジュール一覧</h2>
+        <div className={stylecommon.stylecalendar}>
+          <FullCalendar
+            plugins={[interactionPlugin, timeGridPlugin]}
+            initialView="timeGridWeek"
+            nowIndicator={true}
+            editable={true}
+            locale='ja'
+            businessHours={false}
+            initialEvents={INITIAL_EVENTS}
+          />
+        </div>
       </div>
     </Layout>
   )

@@ -12,7 +12,8 @@ import nookies from "nookies";
 import { firebaseAdmin } from "../../firebaseAdmin";
 import { getFirebaseAuth, password,logout } from "../../utils/firebase";
 
-import styles from '../../styles/Customer.module.css'
+import stylecommon from '../../styles/Common.module.css'
+import stylecustomer from '../../styles/Customer.module.css'
 
 const LoginPage: NextPage<{ user: any }> = ({ user }) => {
   const router = useRouter();
@@ -45,8 +46,8 @@ const LoginPage: NextPage<{ user: any }> = ({ user }) => {
         <meta name="description" content="予約管理システム" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className={styles.container}>
-        <nav className={styles.nav}>
+      <div className={stylecommon.container}>
+        <nav className={stylecommon.nav}>
           {user ? (
               <>
                 <a onClick={onLogout}>ログアウト</a>
@@ -60,18 +61,22 @@ const LoginPage: NextPage<{ user: any }> = ({ user }) => {
           ) }
           <Link href=""><a href="https://uemu-engineer.com/" target="_blank" rel="noreferrer">Nu-stack</a></Link>
         </nav>
-        <h2 className={styles.title}>パスワードリマインダー</h2>
+        <h2 className={stylecommon.title}>パスワードリマインダー</h2>
         <form onSubmit={onSubmit}>
-          <div className="form-contnt">
-            <div className="label-content">
-              <label htmlFor="email">Email:</label>
+          <div className={stylecommon.formcont}>
+            <div className={stylecommon.labelcontent}>
+              <label
+                className={stylecommon.labelinput}
+                htmlFor="email">
+                Email:
+              </label>
               <input
                 id="email"
                 value={email}
                 onInput={(e) => setEmail(e.currentTarget.value)}
               />
             </div>
-            <button type="submit">送信する</button>
+            <button className={stylecommon.inputbutton} type="submit">送信する</button>
           </div>
         </form>
       </div>

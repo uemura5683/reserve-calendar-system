@@ -12,7 +12,8 @@ import { firebaseAdmin } from "../../firebaseAdmin";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { getFirebaseAuth, logout } from '../../utils/firebase'
 
-import styles from '../../styles/Customer.module.css'
+import stylecommon from '../../styles/Common.module.css'
+import stylecustomer from '../../styles/Customer.module.css'
 
 
 const SignUp: NextPage<{ user: any }> = ({ user }) => {
@@ -43,8 +44,8 @@ const SignUp: NextPage<{ user: any }> = ({ user }) => {
         <meta name="description" content="予約管理システム" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className={styles.container}>
-        <nav className={styles.nav}>
+      <div className={stylecommon.container}>
+        <nav className={stylecommon.nav}>
         {user ? (
               <>
                 <a onClick={onLogout}>ログアウト</a>
@@ -58,32 +59,37 @@ const SignUp: NextPage<{ user: any }> = ({ user }) => {
           ) }
           <Link href=""><a href="https://uemu-engineer.com/" target="_blank" rel="noreferrer">Nu-stack</a></Link>
         </nav>
-        <h2 className={styles.title}>新規会員登録</h2>
+        <h2 className={stylecommon.title}>新規会員登録</h2>
         <form className="auth" onSubmit={createUser}>
-            <div className="form-contnt">
-              <div className="label-content">
-                <label htmlFor="email" className="auth-label">
-                    Email:{' '}
+            <div className={stylecommon.formcont}>
+              <div className={stylecommon.labelcontent}>
+                <label
+                  className={stylecommon.labelinput}
+                  htmlFor="email">
+                  Email:{' '}
                 </label>
                 <input
-                    id="email"
-                    className="auth-input"
-                    type="email"
-                    onChange={(e) => setEmail(e.target.value)}
+                  id="email"
+                  className="auth-input"
+                  type="email"
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
-              <div className="label-content">
-                <label htmlFor="password" className="auth-label">
-                    Password:{' '}
+              <div className={stylecommon.labelcontent}>
+                <label
+                  htmlFor="password"
+                  className={stylecommon.labelinput}
+                >
+                  Password:{' '}
                 </label>
                 <input
-                    id="password"
-                    className="auth-input"
-                    type="password"
-                    onChange={(e) => setPassword(e.target.value)}
+                  id="password"
+                  className="auth-input"
+                  type="password"
+                  onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
-              <button className="auth-btn" type="submit">
+              <button className={stylecommon.inputbutton} type="submit">
                 会員登録する
               </button>
             </div>

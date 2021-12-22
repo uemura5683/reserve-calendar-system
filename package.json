@@ -4,9 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "build": "nuxt generate",
+    "start": "nuxt start"
   },
   "dependencies": {
     "@fullcalendar/core": "^5.10.1",

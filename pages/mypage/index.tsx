@@ -9,7 +9,8 @@ import { useRouter } from "next/router";
 import { logout} from "../../utils/firebase";
 import { firebaseAdmin } from "../../firebaseAdmin";
 
-import styles from '../../styles/Mypage.module.css'
+import stylecommon from '../../styles/Common.module.css'
+import stylemypage from '../../styles/Mypage.module.css'
 
 const Mypage: NextPage<{ user: any }> = ({ user }) => {
   const router = useRouter();
@@ -26,8 +27,8 @@ const Mypage: NextPage<{ user: any }> = ({ user }) => {
         <meta name="description" content="予約管理システム" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className={styles.container}>
-        <nav className={styles.nav}>
+      <div className={stylecommon.container}>
+        <nav className={stylecommon.nav}>
           {user ? (
               <>
                 <a onClick={onLogout}>ログアウト</a>
@@ -41,14 +42,14 @@ const Mypage: NextPage<{ user: any }> = ({ user }) => {
           ) }
           <Link href=""><a href="https://uemu-engineer.com/" target="_blank" rel="noreferrer">Nu-stack</a></Link>
         </nav>
-        <main className={styles.main}>
-          <h2 className={styles.title}>予約管理システム</h2>
+        <main className={stylecommon.main}>
+          <h2 className={stylecommon.title}>予約管理システム</h2>
           { user ? (
             <>
               <h3>こんにちは {user.email}様</h3>
             </>
           ) : null }
-          <div className={styles.content}>
+          <div className={stylecommon.content}>
             <ul>
               <li><Link href="/">予約状況</Link></li>
               <li><Link href="/mypage/mailaddress">メールアドレス変更</Link></li>

@@ -12,7 +12,8 @@ import nookies from "nookies";
 import { firebaseAdmin } from "../../firebaseAdmin";
 import { getFirebaseAuth, mailaddressupdate, logout } from "../../utils/firebase";
 
-import styles from '../../styles/Mypage.module.css'
+import stylecommon from '../../styles/Common.module.css'
+import stylemypage from '../../styles/Mypage.module.css'
 
 const LoginPage: NextPage<{ user: any }> = ({ user }) => {
   const router = useRouter();
@@ -45,8 +46,8 @@ const LoginPage: NextPage<{ user: any }> = ({ user }) => {
         <meta name="description" content="予約管理システム" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className={styles.container}>
-        <nav className={styles.nav}>
+      <div className={stylecommon.container}>
+        <nav className={stylecommon.nav}>
           {user ? (
               <>
                 <a onClick={onLogout}>ログアウト</a>
@@ -60,18 +61,23 @@ const LoginPage: NextPage<{ user: any }> = ({ user }) => {
           ) }
           <Link href=""><a href="https://uemu-engineer.com/" target="_blank" rel="noreferrer">Nu-stack</a></Link>
         </nav>
-        <h2 className={styles.title}>メールアドレス変更</h2>
-        <form onSubmit={onSubmit}>
-          <div className="form-contnt">
-            <div className="label-content">
-              <label htmlFor="mailaddress">メールアドレス:</label>
+        <h2 className={stylecommon.title}>メールアドレス変更</h2>
+        <form className={stylecommon.formcont} onSubmit={onSubmit}>
+          <div>
+            <div className={stylecommon.labelcontent}>
+              <label
+                className={stylecommon.labelinput}
+                htmlFor="mailaddress"
+              >
+                メールアドレス:
+              </label>
               <input
                 id="mailaddress"
                 value={mailaddress}
                 onInput={(e) => setMailAddress(e.currentTarget.value)}
               />
             </div>
-            <button type="submit">送信する</button>
+            <button className={stylecommon.inputbutton} type="submit">送信する</button>
           </div>
         </form>
       </div>

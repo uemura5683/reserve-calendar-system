@@ -9,7 +9,8 @@ import { useRouter } from "next/router";
 import { logout} from "../utils/firebase";
 import { firebaseAdmin } from "../firebaseAdmin";
 
-import styles from '../styles/Home.module.css'
+import stylecommon from '../styles/Common.module.css'
+import styleindex from '../styles/Home.module.css'
 
 const IndexPage: NextPage<{ user: any }> = (user) => {
   const router = useRouter();
@@ -25,8 +26,8 @@ const IndexPage: NextPage<{ user: any }> = (user) => {
         <meta name="description" content="予約管理システム" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className={styles.container}>
-        <nav className={styles.nav}>
+      <div className={stylecommon.container}>
+        <nav className={stylecommon.nav}>
           {user.user ? (
               <>
                 <a onClick={onLogout}>ログアウト</a>
@@ -40,8 +41,8 @@ const IndexPage: NextPage<{ user: any }> = (user) => {
           ) }
           <Link href=""><a href="https://uemu-engineer.com/" target="_blank" rel="noreferrer">Nu-stack</a></Link>
         </nav>
-        <main className={styles.main}>
-          <h2 className={styles.title}>予約管理システム</h2>
+        <main className={styleindex.main}>
+          <h2 className={stylecommon.title}>予約管理システム</h2>
           <p>
             このサイトは●●●●の予約管理ツールです。
           </p>
