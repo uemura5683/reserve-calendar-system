@@ -2,30 +2,21 @@ memo
 
 https://qiita.com/rpf-nob/items/466d5c8e0204146b2d6f
 
-https://yuw27b.hatenablog.com/entry/2018/10/04/231748
-
 https://www.google.com/search?q=%E4%BA%88%E7%B4%84%E7%AE%A1%E7%90%86%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0&rls=com.microsoft:ja:%7Breferrer:source%3F%7D&rlz=1I7SUNC_ja&sxsrf=AOaemvJp8rg4wYaOyt92CFJHI-9cFCY-Fg:1632536807310&source=lnms&tbm=isch&sa=X&ved=2ahUKEwjHtO3DiZnzAhWEZd4KHWo5BIMQ_AUoAXoECAEQAw&biw=1280&bih=689&dpr=2#imgrc=rD_QOOA4f4ritM
 
 https://fullcalendar.io/
 
-https://lpeg.info/html/javascript_css_calendar.html
-
+FullCalendar（v5.5.1）で週間カレンダーの中身に「予約可◎」を表示させたいです。
 https://teratail.com/questions/318737
-
-https://qiita.com/yk2220s/items/8ed4d781412f6c4e9c45
-
-https://fullcalendar.io/
-
-https://qiita.com/TakeshiNickOsanai/items/7eed1ca8b9e482d392bc
 
 https://zenn.dev/uttk/articles/f48fc75120f018
 
 https://zenn.dev/maztak/articles/e72a5a38435af7
-
-https://console.firebase.google.com/project/next-translation/settings/iam
 
 https://qiita.com/d0ne1s/items/066d8ced7bb3ac3ce05b
 
 https://javascript.tutorialink.com/firebase-login-check-if-email-in-use/
 
 https://log.pocka.io/ja/posts/typescript-builtin-type-functions/
+
+https://fullcalendar.io/docs/react

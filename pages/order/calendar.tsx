@@ -11,7 +11,7 @@ import { firebaseAdmin } from "../../firebaseAdmin";
 import { logout} from "../../utils/firebase";
 
 import FullCalendar, { DateSelectArg, EventApi } from "@fullcalendar/react";
-import interactionPlugin from "@fullcalendar/interaction";
+import interactionPlugin, { DateClickArg }  from "@fullcalendar/interaction";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import { INITIAL_EVENTS, createEventId } from "../../utils/event-utils";
 
@@ -22,6 +22,14 @@ import "@fullcalendar/timegrid/main.css";
 import stylecommon from '../../styles/Common.module.css'
 import stylecalendar from '../../styles/Calendar.module.css'
 
+const thisMonth = () => {
+  const today = new Date();
+  return `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(
+    2,
+    "0"
+  )}`;
+};
+
 const Calendarpage: NextPage<{ user: any }> = ({ user }) => {
 
   const onLogout = async () => {
@@ -29,19 +37,8 @@ const Calendarpage: NextPage<{ user: any }> = ({ user }) => {
     router.push("/customer/logout"); // ログインページへ遷移させる
   };
 
-  const handleDateSelect = useCallback((selectInfo: DateSelectArg) => {
-    let title = prompt("イベントのタイトルを入力してください")?.trim();
-    let calendarApi = selectInfo.view.calendar;
-    calendarApi.unselect();
-    if (title) {
-      calendarApi.addEvent({
-        id: createEventId(),
-        title,
-        start: selectInfo.startStr,
-        end: selectInfo.endStr,
-        allDay: selectInfo.allDay,
-      });
-    }
+  const handleDateClick = useCallback((arg: DateClickArg) => {
+    alert(arg.dateStr);
   }, []);
 
   const router = useRouter();
@@ -77,6 +74,16 @@ const Calendarpage: NextPage<{ user: any }> = ({ user }) => {
             locale='ja'
             businessHours={false}
             initialEvents={INITIAL_EVENTS}
+            titleFormat={{
+              year: "numeric",
+              month: "short",
+              day: "numeric",
+            }} // タイトルに年月日を表示
+            events={[
+              { title: "event 1", date: `${thisMonth()}-01` },
+              { title: "event 2", date: `${thisMonth()}-02` },
+            ]}
+            dateClick={handleDateClick}
           />
         </div>
       </div>
