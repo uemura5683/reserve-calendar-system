@@ -11,8 +11,10 @@ import { firebaseAdmin } from "../../firebaseAdmin";
 import { logout} from "../../utils/firebase";
 
 import FullCalendar, { DateSelectArg, EventApi } from "@fullcalendar/react";
-import interactionPlugin, { DateClickArg }  from "@fullcalendar/interaction";
+import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
+import interactionPlugin from "@fullcalendar/interaction"; // needed for dayClick
+
 import { INITIAL_EVENTS, createEventId } from "../../utils/event-utils";
 
 import "@fullcalendar/common/main.css";
@@ -22,26 +24,48 @@ import "@fullcalendar/timegrid/main.css";
 import stylecommon from '../../styles/Common.module.css'
 import stylecalendar from '../../styles/Calendar.module.css'
 
-const thisMonth = () => {
-  const today = new Date();
-  return `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(
-    2,
-    "0"
-  )}`;
-};
 
-const Calendarpage: NextPage<{ user: any }> = ({ user }) => {
+const Calendarpage: NextPage<{ user: any, myEvents:any, handleClick:any, handleSelect:any, selectInfo:any }> = ({ user, myEvents, handleClick, handleSelect, selectInfo }) => {
 
   const onLogout = async () => {
     await logout(); // ログアウトさせる
     router.push("/customer/logout"); // ログインページへ遷移させる
   };
-
-  const handleDateClick = useCallback((arg: DateClickArg) => {
-    alert(arg.dateStr);
-  }, []);
-
   const router = useRouter();
+
+
+  handleClick = ({info}: {info:any}) => {
+  }
+
+  handleSelect = () => {
+  }
+
+  myEvents = [
+    {
+      id: 0,
+      title: "event 1",
+      start: "2022-01-24 10:00:00",
+      end: "2022-01-24 11:00:00",
+      memo: "memo1",
+    },
+    {
+      id: 1,
+      title: "event 2",
+      start: "2022-01-25 10:00:00",
+      end: "2022-01-25 11:00:00",
+      memo: "memo2",
+    },
+  ];
+  
+  const renderForm = () => {
+    return (
+      <>
+        <div className={stylecommon.containerform}>
+        </div>
+      </>
+    )
+  }
+
   return (
     <Layout>
       <Head>
@@ -66,24 +90,31 @@ const Calendarpage: NextPage<{ user: any }> = ({ user }) => {
         </nav>
         <h2 className={stylecommon.title}>スケジュール一覧</h2>
         <div className={stylecommon.stylecalendar}>
+          {renderForm}
           <FullCalendar
             plugins={[interactionPlugin, timeGridPlugin]}
             initialView="timeGridWeek"
+            slotDuration="00:30:00" // 表示する時間軸の最小値
+            selectable={true} // 日付選択可能
+            allDaySlot={false} // alldayの表示設定
             nowIndicator={true}
             editable={true}
             locale='ja'
-            businessHours={false}
             initialEvents={INITIAL_EVENTS}
             titleFormat={{
               year: "numeric",
               month: "short",
               day: "numeric",
             }} // タイトルに年月日を表示
-            events={[
-              { title: "event 1", date: `${thisMonth()}-01` },
-              { title: "event 2", date: `${thisMonth()}-02` },
-            ]}
-            dateClick={handleDateClick}
+            businessHours={{
+              daysOfWeek: [1, 2, 3, 4, 5],
+              startTime: "0:00",
+              endTime: "24:00",
+            }}
+            select={handleSelect}
+            eventClick={handleClick}
+            weekends={true} // 週末表示
+            events={myEvents}
           />
         </div>
       </div>
