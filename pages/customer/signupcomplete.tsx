@@ -26,7 +26,7 @@ const EntryComplete: NextPage<{ user: any }> = (user) => {
         <meta name="description" content="予約管理システム" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className={stylecommon.container}>
+      <div className={stylecustomer.container}>
         <nav className={stylecommon.nav}>
           {user.user ? (
               <>
@@ -44,11 +44,13 @@ const EntryComplete: NextPage<{ user: any }> = (user) => {
         <main className={stylecommon.main}>
           <h2 className={stylecommon.title}>登録完了</h2>
           <p>
-            登録ありがとうございました！
+            登録ありがとうございました。
           </p>
+          <div className={stylecustomer.inputbutton}>
           <Link href="/customer/login">
             ログインする
           </Link>
+          </div>
         </main>
       </div>
     </Layout>

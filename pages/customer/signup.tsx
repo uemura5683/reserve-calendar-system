@@ -30,7 +30,17 @@ const SignUp: NextPage<{ user: any }> = ({ user }) => {
   const createUser = async (event: FormEvent) => {
     event.preventDefault()
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
+      await createUserWithEmailAndPassword(auth, email, password)
+              .then((userCredential) => {
+                // Signed in
+                const user = userCredential.user;
+                // ...
+              })
+              .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                // ..
+              });
       router.push('/customer/signupcomplete')
     } catch (err: any) {
        alert(err.message);
