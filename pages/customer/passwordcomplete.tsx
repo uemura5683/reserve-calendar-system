@@ -43,12 +43,14 @@ const EntryComplete: NextPage<{ user: any }> = (user) => {
         </nav>
         <main className={stylecommon.main}>
           <h2 className={stylecommon.title}>パスワードリマインダー</h2>
-          <p>
-            パスワードリセット完了しました。
-          </p>
-          <Link href="/">
-            トップへ
-          </Link>
+          <div className={stylecommon.txtcenter}>
+            <p>
+              パスワードリセット完了しました。
+            </p>
+            <Link href="/">
+              トップへ
+            </Link>
+          </div>
         </main>
       </div>
     </Layout>

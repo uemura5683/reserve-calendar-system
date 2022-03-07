@@ -84,3 +84,16 @@
   margin: 1rem 0;
   max-width: 320px;
 }
+
+/**
+* utility
+**/
+.txtleft {
+  text-align: left;
+}
+.txtcenter {
+  text-align: center;
+}
+.txtright {
+  text-align: right;
+}

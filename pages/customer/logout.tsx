@@ -41,14 +41,16 @@ const EntryComplete: NextPage<{ user: any }> = (user) => {
           ) }
           <Link href=""><a href="https://uemu-engineer.com/" target="_blank" rel="noreferrer">Nu-stack</a></Link>
         </nav>
-        <main className={stylescustomer.main}>
-          <h2 className={stylescustomer.title}>ログアウト</h2>
-          <p>
-            ログアウトしました。
-          </p>
-          <Link href="/">
-            トップへ
-          </Link>
+        <main className={stylecommon.main}>
+          <h2 className={stylecommon.title}>ログアウト</h2>
+          <div className={stylecommon.txtcenter}>
+            <p>
+              ログアウトしました。
+            </p>
+            <Link href="/">
+              トップへ
+            </Link>
+          </div>
         </main>
       </div>
     </Layout>

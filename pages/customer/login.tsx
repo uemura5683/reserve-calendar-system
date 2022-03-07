@@ -26,7 +26,6 @@ const LoginPage: NextPage<{ user: any }> = (user) => {
 
   const onSubmit = async (event: FormEvent) => {
     event.preventDefault(); // デフォルトの<form />の挙動を無効にする
-
     if( email != null && password != null ) {
       try {
         await login(email, password); // email・passwordを使ってログイン

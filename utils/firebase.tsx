@@ -2,7 +2,8 @@ import type { FirebaseApp } from "firebase/app";
 import type { Auth as FirebaseAuth } from "firebase/auth";
 
 import { getApps, initializeApp } from "firebase/app";
-import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail, updatePassword, updateEmail } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail, updatePassword, updateEmail, fetchSignInMethodsForEmail, createUserWithEmailAndPassword, EmailAuthProvider } from "firebase/auth";
+
 
 /**
  * @description Firebaseの管理画面から取得したAPIオブジェクト
@@ -60,12 +61,44 @@ export const logout = async () => {
   await fetch("/api/sessionLogout", { method: "POST" });
 };
 
-// /**
-//  * 
-//  * @param auth:any
-//  * @param email: string
-//  * https://firebase.google.com/docs/auth/web/manage-users?hl=ja
-//  */
+/**
+ * @description 会員登録
+ * @param auth 
+ * @param newemail 
+ */
+export const signup = async (router:any ,auth:any, email: string, password: string) => {
+
+  // email・password入力してる時
+  if(email != '' && password != '') {
+    // 登録確認をする
+    const auth = getFirebaseAuth();
+    const providers = await fetchSignInMethodsForEmail(auth, email);
+
+    // すでに登録済みの場合
+    if (providers.findIndex(p => p === EmailAuthProvider.EMAIL_PASSWORD_SIGN_IN_METHOD) !== -1) {
+      alert('すでに登録されているようです');
+    // 未登録の場合
+    } else {
+      // アカウント作成
+      await createUserWithEmailAndPassword(auth, email, password);
+      router.push('/customer/signupcomplete')
+    }
+  } else {
+    if( email == '' ) {
+      alert('メールアドレスを入力してください。')
+    }
+    if( password == '' ) {
+      alert('パスワードを入力してください。')
+    }
+  }
+}
+
+/**
+  * 
+  * @param auth:any
+  * @param email: string
+  * https://firebase.google.com/docs/auth/web/manage-users?hl=ja
+  */
 export const mailaddressupdate = async (auth: any, newemail: string) => {
   const user = auth.currentUser;
   await updateEmail(user, newemail).then(() => {

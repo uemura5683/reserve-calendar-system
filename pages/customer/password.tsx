@@ -26,7 +26,7 @@ const LoginPage: NextPage<{ user: any }> = ({ user }) => {
   const onSubmit = async (event: FormEvent) => {
     event.preventDefault(); // デフォルトの<form />の挙動を無効にする
     let auth = getFirebaseAuth();
-    if( email != null ) {
+    if( email != '' ) {
       try {
         await password(email); // email・passwordを使ってログイン
         router.push("/customer/passwordcomplete"); //トップページへ遷移させる

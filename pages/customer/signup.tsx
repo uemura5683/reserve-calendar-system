@@ -9,8 +9,7 @@ import type { GetServerSideProps, NextPage } from "next";
 import nookies from "nookies";
 
 import { firebaseAdmin } from "../../firebaseAdmin";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { getFirebaseAuth, logout } from '../../utils/firebase'
+import { getFirebaseAuth, logout, signup} from '../../utils/firebase'
 
 import stylecommon from '../../styles/Common.module.css'
 import stylecustomer from '../../styles/Customer.module.css'
@@ -20,30 +19,20 @@ const SignUp: NextPage<{ user: any }> = ({ user }) => {
   const router = useRouter()
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
-  const auth = getFirebaseAuth();
 
+  // ログアウトさせる
   const onLogout = async () => {
-    await logout(); // ログアウトさせる
-    router.push("/customer/logout"); // ログインページへ遷移させる
+    await logout(); 
+    router.push("/customer/logout"); 
   };
 
+  // 会員登録する
   const createUser = async (event: FormEvent) => {
     event.preventDefault()
     try {
-      await createUserWithEmailAndPassword(auth, email, password)
-              .then((userCredential) => {
-                // Signed in
-                const user = userCredential.user;
-                // ...
-              })
-              .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                // ..
-              });
-      router.push('/customer/signupcomplete')
+      signup(router, getFirebaseAuth, email, password);
     } catch (err: any) {
-       alert(err.message);
+      alert(err.message);
     }
   }
 
