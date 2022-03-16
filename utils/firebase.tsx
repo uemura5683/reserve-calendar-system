@@ -2,7 +2,7 @@ import type { FirebaseApp } from "firebase/app";
 import type { Auth as FirebaseAuth } from "firebase/auth";
 
 import { getApps, initializeApp } from "firebase/app";
-import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail, updatePassword, updateEmail, fetchSignInMethodsForEmail, createUserWithEmailAndPassword, EmailAuthProvider } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail, updatePassword, updateEmail, fetchSignInMethodsForEmail, createUserWithEmailAndPassword, EmailAuthProvider, deleteUser } from "firebase/auth";
 
 
 /**
@@ -127,7 +127,7 @@ export const mailaddressupdate = async (auth: any, newemail: string) => {
 /**
  * @description パスワードリマインダー
  */
- export const password = async (email: string) => {
+export const password = async (email: string) => {
   // FirebaseAuthを取得する
   const auth = getFirebaseAuth();
 
@@ -141,4 +141,17 @@ export const mailaddressupdate = async (auth: any, newemail: string) => {
       // メール送信失敗
       console.log(error)
     })
-  };
+};
+
+/**
+* @description 退会処理
+* https://firebase.google.com/docs/auth/web/manage-users?hl=ja#web-version-9_11
+*/
+export const withdrawal = async (auth: any) => {
+  const user = auth.currentUser;
+  deleteUser(user).then(() => {
+    console.log('退会処理成功');
+  }).catch((error) => {
+    console.log('退会処理失敗');
+  });
+}

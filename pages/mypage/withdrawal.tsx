@@ -10,14 +10,13 @@ import { useRouter } from "next/router";
 import nookies from "nookies";
 
 import { firebaseAdmin } from "../../firebaseAdmin";
-import { login, logout } from "../../utils/firebase";
+import { getFirebaseAuth, withdrawal, logout } from "../../utils/firebase";
 
 import stylecommon from '../../styles/Common.module.css'
 
 const LoginPage: NextPage<{ user: any }> = (user) => {
   const router = useRouter();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [emailaddress, setEmail] = useState("");
 
   const onLogout = async () => {
     await logout(); // ログアウトさせる
@@ -25,20 +24,22 @@ const LoginPage: NextPage<{ user: any }> = (user) => {
 
   const onSubmit = async (event: FormEvent) => {
     event.preventDefault(); // デフォルトの<form />の挙動を無効にする
-    if( email != '' && password != '' ) {
+    let auth = getFirebaseAuth();
+    if( emailaddress != '' ) {
       try {
-        await login(email, password); // email・passwordを使ってログイン
-        router.push("/mypage"); //トップページへ遷移させる
+          if( user.user.email === emailaddress ) {
+            await withdrawal(auth); 
+            router.push("/mypage/withdrawalcomplete"); //退会完了ページへ遷移させる
+          } else {
+            alert('email間違ってます');            
+          }
       } catch( err ) {
-        alert('ログイン情報が正しくありません');
+        alert('email間違ってます');
       }
     } else {
-      if(email == '') {
+      if(emailaddress == '') {
         alert('emailを入力してください。');
       }
-      if(password == '') {
-        alert('passwordを入力してください。');
-      }  
     }
   };
   return (
@@ -63,9 +64,12 @@ const LoginPage: NextPage<{ user: any }> = (user) => {
           ) }
           <Link href=""><a href="https://uemu-engineer.com/" target="_blank" rel="noreferrer">Nu-stack</a></Link>
         </nav>
-        <h2 className={stylecommon.title}>ログイン</h2>
+        <h2 className={stylecommon.title}>退会処理</h2>
         <form onSubmit={onSubmit}>
           <div className={stylecommon.formcont}>
+            <div className={stylecommon.lead}>
+                メールアドレスを入力ください
+            </div>
             <div className={stylecommon.labelcontent}>
               <label
                 className={stylecommon.labelinput}
@@ -74,25 +78,11 @@ const LoginPage: NextPage<{ user: any }> = (user) => {
               </label>
               <input
                 id="email"
-                value={email}
+                value={emailaddress}
                 onInput={(e) => setEmail(e.currentTarget.value)}
               />
             </div>
-            <div className={stylecommon.labelcontent}>
-              <label
-                className={stylecommon.labelinput} 
-                htmlFor="password">
-                Password:
-              </label>
-              <input
-                id="password"
-                type="password"
-                value={password}
-                onInput={(e) => setPassword(e.currentTarget.value)}
-              />
-            </div>
-            <button className={stylecommon.inputbutton} type="submit">login</button>
-            <Link href="/customer/password">パスワードお忘れの方はこちら</Link>
+            <button className={stylecommon.inputbutton} type="submit">退会する</button>
           </div>
         </form>
       </div>

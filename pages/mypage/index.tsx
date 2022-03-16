@@ -43,18 +43,21 @@ const Mypage: NextPage<{ user: any }> = ({ user }) => {
           <Link href=""><a href="https://uemu-engineer.com/" target="_blank" rel="noreferrer">Nu-stack</a></Link>
         </nav>
         <main className={stylecommon.main}>
-          <h2 className={stylecommon.title}>予約管理システム</h2>
-          { user ? (
-            <>
-              <h3>こんにちは {user.email}様</h3>
-            </>
-          ) : null }
-          <div className={stylecommon.content}>
-            <ul>
-              <li><Link href="/">予約状況</Link></li>
-              <li><Link href="/mypage/mailaddress">メールアドレス変更</Link></li>
-              <li><Link href="/mypage/password">パスワード変更</Link></li>           
-            </ul>
+          <h2 className={stylecommon.title}>マイページ</h2>
+          <div className={stylemypage.mypage_content}>
+            { user ? (
+              <>
+                <h3 className={stylemypage.mypage_address}>ユーザーアドレス<br />{user.email}</h3>
+              </>
+            ) : null }
+            <div className={stylemypage.mypage_contentinner}>
+              <ul>
+                <li><Link href="/">予約状況</Link></li>
+                <li><Link href="/mypage/mailaddress">メールアドレス変更</Link></li>
+                <li><Link href="/mypage/password">パスワード変更</Link></li>
+                <li><Link href="/mypage/withdrawal">退会</Link></li>
+              </ul>
+            </div>
           </div>
         </main>
       </div>

@@ -41,10 +41,10 @@ const EntryComplete: NextPage<{ user: any }> = (user) => {
           <Link href=""><a href="https://uemu-engineer.com/" target="_blank" rel="noreferrer">Nu-stack</a></Link>
         </nav>
         <main className={stylecommon.main}>
-          <h2 className={stylecommon.title}>メールアドレス変更</h2>
+          <h2 className={stylecommon.title}>退会完了</h2>
           <div className={stylecommon.txtcenter}>
-            <p>
-              メールアドレス変更完了しました。
+            <p className={stylecommon.lead}>
+              退会完了しました。またのご利用をお待ちしております。
             </p>
             <Link href="/">
               トップへ

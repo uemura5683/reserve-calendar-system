@@ -49,10 +49,22 @@
   padding: 0 1rem;
 }
 
+/** 
+* title
+**/
 .title {
   text-align: center;
   padding: 2rem 0;
   font-size: 1.4rem;
+}
+
+/**
+* lead
+**/
+.lead {
+  display: block;
+  margin: 0 0 1rem;
+  font-size: 1.0rem;
 }
 
 /**
