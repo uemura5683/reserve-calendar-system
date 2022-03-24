@@ -43,12 +43,14 @@ const EntryComplete: NextPage<{ user: any }> = (user) => {
         <main className={stylecommon.main}>
           <h2 className={stylecommon.title}>メールアドレス変更</h2>
           <div className={stylecommon.txtcenter}>
-            <p>
+            <p className={stylecommon.lead}>
               メールアドレス変更完了しました。
             </p>
-            <Link href="/">
-              トップへ
-            </Link>
+            <div className={stylecommon.inputbutton}>
+              <Link href="/">
+                トップへ
+              </Link>
+            </div>
           </div>
         </main>
       </div>

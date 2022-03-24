@@ -43,12 +43,16 @@ const IndexPage: NextPage<{ user: any }> = (user) => {
         </nav>
         <main className={styleindex.main}>
           <h2 className={stylecommon.title}>予約管理システム</h2>
-          <p>
-            このサイトは●●●●の予約管理ツールです。
-          </p>
-          <Link href="/order/calendar">
-            予約する
-          </Link>
+          <div className={stylecommon.txtcenter}>
+            <p className={stylecommon.lead}>
+              このサイトは●●●●の予約管理ツールです。
+            </p>
+            <div className={stylecommon.inputbutton}>
+              <Link href="/order/calendar">
+                予約する
+              </Link>
+            </div>
+          </div>
         </main>
       </div>
     </Layout>

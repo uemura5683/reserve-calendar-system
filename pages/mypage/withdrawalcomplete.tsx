@@ -46,9 +46,11 @@ const EntryComplete: NextPage<{ user: any }> = (user) => {
             <p className={stylecommon.lead}>
               退会完了しました。またのご利用をお待ちしております。
             </p>
-            <Link href="/">
-              トップへ
-            </Link>
+            <div className={stylecommon.inputbutton}>
+              <Link href="/">
+                トップへ
+              </Link>
+            </div>
           </div>
         </main>
       </div>

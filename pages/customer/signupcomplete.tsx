@@ -10,7 +10,6 @@ import { logout} from "../../utils/firebase";
 import { firebaseAdmin } from "../../firebaseAdmin";
 
 import stylecommon from '../../styles/Common.module.css'
-import stylecustomer from '../../styles/Customer.module.css'
 
 const EntryComplete: NextPage<{ user: any }> = (user) => {
   const router = useRouter();
@@ -26,7 +25,7 @@ const EntryComplete: NextPage<{ user: any }> = (user) => {
         <meta name="description" content="予約管理システム" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className={stylecustomer.container}>
+      <div className={stylecommon.container}>
         <nav className={stylecommon.nav}>
           {user.user ? (
               <>
@@ -43,13 +42,15 @@ const EntryComplete: NextPage<{ user: any }> = (user) => {
         </nav>
         <main className={stylecommon.main}>
           <h2 className={stylecommon.title}>登録完了</h2>
-          <p>
-            登録ありがとうございました。
-          </p>
-          <div className={stylecustomer.inputbutton}>
-          <Link href="/customer/login">
-            ログインする
-          </Link>
+          <div className={stylecommon.txtcenter}>
+            <p className={stylecommon.lead}>
+              登録ありがとうございました。
+            </p>
+            <div className={stylecommon.inputbutton}>
+              <Link href="/customer/login">
+                ログインする
+              </Link>
+            </div>
           </div>
         </main>
       </div>

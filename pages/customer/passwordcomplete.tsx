@@ -10,7 +10,6 @@ import { logout} from "../../utils/firebase";
 import { firebaseAdmin } from "../../firebaseAdmin";
 
 import stylecommon from '../../styles/Common.module.css'
-import stylecustomer from '../../styles/Customer.module.css'
 
 const EntryComplete: NextPage<{ user: any }> = (user) => {
   const router = useRouter();
@@ -44,12 +43,14 @@ const EntryComplete: NextPage<{ user: any }> = (user) => {
         <main className={stylecommon.main}>
           <h2 className={stylecommon.title}>パスワードリマインダー</h2>
           <div className={stylecommon.txtcenter}>
-            <p>
+            <p className={stylecommon.lead}>
               パスワードリセット完了しました。
             </p>
-            <Link href="/">
-              トップへ
-            </Link>
+            <div className={stylecommon.inputbutton}>
+              <Link href="/">
+                トップへ
+              </Link>
+            </div>
           </div>
         </main>
       </div>

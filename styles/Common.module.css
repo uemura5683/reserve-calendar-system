@@ -1,13 +1,12 @@
 /**
-* wrapper
+* layout
 **/
+
+/* wrapper */
 .wrapper {
   margin: 0;
 }
-
-/**
-* header
-**/
+/* header */
 .header {
   box-shadow: 0 1px 0 0 black;
 }
@@ -19,17 +18,11 @@
 .headerlogo a {
   text-decoration: none;
 }
-
-/**
-* main
-**/
+/* main */
 .main {
   margin: 1rem;
 }
-
-/**
-* footer
-**/
+/* footer */
 .footer {
   box-shadow: 0 -1px 0 0 black;
   margin: 1rem 0;
@@ -37,8 +30,10 @@
 }
 
 /**
-* nav
+* component
 **/
+
+/* nav */
 .nav {
   padding: 0 1rem 1rem;
   box-shadow: 0 1px 0 0 black;
@@ -49,27 +44,21 @@
   padding: 0 1rem;
 }
 
-/** 
-* title
-**/
+/* title */
 .title {
   text-align: center;
   padding: 2rem 0;
   font-size: 1.4rem;
 }
 
-/**
-* lead
-**/
+/* lead */
 .lead {
   display: block;
   margin: 0 0 1rem;
   font-size: 1.0rem;
 }
 
-/**
-* form
-**/
+/* form */
 .formcont {
   text-align: center;
   max-width: 500px;
@@ -95,6 +84,27 @@
 .inputbutton {
   margin: 1rem 0;
   max-width: 320px;
+}
+
+/*button*/
+.inputbutton {
+  margin: 1rem auto;
+  max-width: 320px;
+  border: none;
+  outline: none;
+  background: transparent;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border: 1px solid #999999;
+  background-color: white;
+  transition: .3s all ease;
+  width: auto;
+  height: 40px;
+  line-height: 40px;
+}
+.inputbutton a {
+  text-decoration: none;
+  display: block;
 }
 
 /**

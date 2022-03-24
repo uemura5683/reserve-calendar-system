@@ -43,12 +43,16 @@ const EntryComplete: NextPage<{ user: any }> = (user) => {
         </nav>
         <main className={stylecommon.main}>
           <h2 className={stylecommon.title}>パスワード変更</h2>
-          <p>
-            パスワードリセット完了しました。
-          </p>
-          <Link href="/">
-            トップへ
-          </Link>
+          <div className={stylecommon.txtcenter}>
+            <p className={stylecommon.lead}>
+              パスワードリセット完了しました。
+            </p>
+            <div className={stylecommon.inputbutton}>
+              <Link href="/">
+                トップへ
+              </Link>
+            </div>
+          </div>
         </main>
       </div>
     </Layout>

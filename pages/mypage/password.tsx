@@ -25,7 +25,7 @@ const LoginPage: NextPage<{ user: any }> = ({ user }) => {
 
   const onSubmit = async (event: FormEvent) => {
     event.preventDefault(); // デフォルトの<form />の挙動を無効にする
-    if( password != null ) {
+    if( password != '' ) {
       try {
         passwordupdate(getFirebaseAuth(), password);
         router.push("/mypage/passwordcomplete"); //トップページへ遷移させる
@@ -33,9 +33,7 @@ const LoginPage: NextPage<{ user: any }> = ({ user }) => {
         alert('送信失敗しました。');
       }
     } else {
-      if(password == '') {
-        alert('パスワードを入力してください。');
-      }
+      alert('パスワードを入力してください。');
     }
   };
   return (

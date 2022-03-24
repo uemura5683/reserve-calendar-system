@@ -13,7 +13,6 @@ import { firebaseAdmin } from "../../firebaseAdmin";
 import { getFirebaseAuth, mailaddressupdate, logout } from "../../utils/firebase";
 
 import stylecommon from '../../styles/Common.module.css'
-import stylemypage from '../../styles/Mypage.module.css'
 
 const LoginPage: NextPage<{ user: any }> = ({ user }) => {
   const router = useRouter();
@@ -26,7 +25,7 @@ const LoginPage: NextPage<{ user: any }> = ({ user }) => {
   const onSubmit = async (event: FormEvent) => {
     event.preventDefault(); // デフォルトの<form />の挙動を無効にする
     let auth = getFirebaseAuth();
-    if( mailaddress != null ) {
+    if( mailaddress != '' ) {
       try {
         mailaddressupdate(auth, mailaddress);
         router.push("/mypage/mailaddresscomplete"); //トップページへ遷移させる
@@ -34,9 +33,7 @@ const LoginPage: NextPage<{ user: any }> = ({ user }) => {
         alert('送信失敗しました。');
       }
     } else {
-      if(mailaddress == '') {
-        alert('メールアドレスを入力してください');
-      }
+      alert('メールアドレスを入力してください');
     }
   };
   return (
