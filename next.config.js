@@ -4,6 +4,7 @@ const withTM = require("next-transpile-modules")([
   "@fullcalendar/daygrid",
   "@fullcalendar/timegrid",
   "@fullcalendar/interaction",
+  "@fullcalendar/google-calendar",
 ]);
 
 module.exports = withTM({
@@ -16,7 +17,9 @@ module.exports = withTM({
     FIREBASE_SENDER_ID: process.env.FIREBASE_SENDER_ID,
     FIREBASE_APPID: process.env.FIREBASE_APPID,
     FIREBASE_ADMIN_CLIENT_EMAIL: process.env.FIREBASE_ADMIN_CLIENT_EMAIL,
-    FIREBASE_ADMIN_PRIVATE_KEY: process.env.FIREBASE_ADMIN_PRIVATE_KEY
+    FIREBASE_ADMIN_PRIVATE_KEY: process.env.FIREBASE_ADMIN_PRIVATE_KEY,
+    GMAIL: process.env.GMAIL,
+    GOOGLEAPI: process.env.GOOGLEAPI,
   },
   //  Strongly suggested to enable Strict Mode to better prepare the app for the future of React.
   reactStrictMode: true,

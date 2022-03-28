@@ -11,9 +11,9 @@ import { firebaseAdmin } from "../../firebaseAdmin";
 import { logout} from "../../utils/firebase";
 
 import FullCalendar, { DateSelectArg, EventApi } from "@fullcalendar/react";
-import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction"; // needed for dayClick
+import googleCalendarPlugin from '@fullcalendar/google-calendar';
 
 import { INITIAL_EVENTS, createEventId } from "../../utils/event-utils";
 
@@ -25,7 +25,7 @@ import stylecommon from '../../styles/Common.module.css'
 import stylecalendar from '../../styles/Calendar.module.css'
 
 
-const Calendarpage: NextPage<{ user: any, myEvents:any, handleClick:any, handleSelect:any, selectInfo:any }> = ({ user, myEvents, handleClick, handleSelect, selectInfo }) => {
+const Calendarpage: NextPage<{ user: any, myEvents:any, handleClick:any, handleSelect:any, selectInfo:any, eventsource:any }> = ({ user, myEvents, handleClick, handleSelect, selectInfo, eventsource }) => {
 
   const onLogout = async () => {
     await logout(); // ログアウトさせる
@@ -35,6 +35,7 @@ const Calendarpage: NextPage<{ user: any, myEvents:any, handleClick:any, handleS
 
 
   handleClick = ({info}: {info:any}) => {
+
   }
 
   handleSelect = () => {
@@ -42,21 +43,10 @@ const Calendarpage: NextPage<{ user: any, myEvents:any, handleClick:any, handleS
 
   myEvents = [
     {
-      id: 0,
-      title: "event 1",
-      start: "2022-01-24 10:00:00",
-      end: "2022-01-24 11:00:00",
-      memo: "memo1",
-    },
-    {
-      id: 1,
-      title: "event 2",
-      start: "2022-01-25 10:00:00",
-      end: "2022-01-25 11:00:00",
-      memo: "memo2",
-    },
+      googleCalendarId: process.env.GMAIL
+    }
   ];
-  
+
   const renderForm = () => {
     return (
       <>
@@ -92,7 +82,7 @@ const Calendarpage: NextPage<{ user: any, myEvents:any, handleClick:any, handleS
         <div className={stylecommon.stylecalendar}>
           {renderForm}
           <FullCalendar
-            plugins={[interactionPlugin, timeGridPlugin]}
+            plugins={[interactionPlugin, timeGridPlugin, googleCalendarPlugin]}
             initialView="timeGridWeek"
             slotDuration="00:30:00" // 表示する時間軸の最小値
             selectable={true} // 日付選択可能
@@ -114,6 +104,7 @@ const Calendarpage: NextPage<{ user: any, myEvents:any, handleClick:any, handleS
             select={handleSelect}
             eventClick={handleClick}
             weekends={true} // 週末表示
+            googleCalendarApiKey= {process.env.GOOGLEAPI}
             events={myEvents}
           />
         </div>
