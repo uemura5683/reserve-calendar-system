@@ -11,14 +11,13 @@ import { useRouter } from "next/router";
 import { firebaseAdmin } from "../../firebaseAdmin";
 import { logout} from "../../utils/firebase";
 
-import FullCalendar, { DateSelectArg, EventApi } from "@fullcalendar/react";
-import { Calendar } from '@fullcalendar/core';
+import FullCalendar from "@fullcalendar/react";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction"; // needed for dayClick
 import googleCalendarPlugin from '@fullcalendar/google-calendar';
 
-import { INITIAL_EVENTS, createEventId } from "../../utils/event-utils";
+import { INITIAL_EVENTS } from "../../utils/event-utils";
 
 import "@fullcalendar/common/main.css";
 import "@fullcalendar/daygrid/main.css";

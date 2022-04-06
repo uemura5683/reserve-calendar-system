@@ -19,6 +19,7 @@ module.exports = withTM({
     FIREBASE_ADMIN_CLIENT_EMAIL: process.env.FIREBASE_ADMIN_CLIENT_EMAIL,
     FIREBASE_ADMIN_PRIVATE_KEY: process.env.FIREBASE_ADMIN_PRIVATE_KEY,
     GMAIL: process.env.GMAIL,
+    GMAIL_USER: process.env.GMAIL_USER,
     GOOGLEAPI: process.env.GOOGLEAPI,
   },
   //  Strongly suggested to enable Strict Mode to better prepare the app for the future of React.
