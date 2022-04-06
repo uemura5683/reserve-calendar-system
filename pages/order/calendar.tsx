@@ -1,7 +1,8 @@
 import Head from 'next/head'
 import Link from 'next/link'
+import axios from "axios"
 import Layout from "../../components/layout";
-import { useCallback, useState } from "react";
+import { useCallback, useState, useEffect } from "react";
 
 import type { GetServerSideProps, NextPage } from "next";
 import nookies from "nookies";
@@ -11,7 +12,9 @@ import { firebaseAdmin } from "../../firebaseAdmin";
 import { logout} from "../../utils/firebase";
 
 import FullCalendar, { DateSelectArg, EventApi } from "@fullcalendar/react";
+import { Calendar } from '@fullcalendar/core';
 import timeGridPlugin from "@fullcalendar/timegrid";
+import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction"; // needed for dayClick
 import googleCalendarPlugin from '@fullcalendar/google-calendar';
 
@@ -24,28 +27,44 @@ import "@fullcalendar/timegrid/main.css";
 import stylecommon from '../../styles/Common.module.css'
 import stylecalendar from '../../styles/Calendar.module.css'
 
-
 const Calendarpage: NextPage<{ user: any, myEvents:any, handleClick:any, handleSelect:any, selectInfo:any, eventsource:any }> = ({ user, myEvents, handleClick, handleSelect, selectInfo, eventsource }) => {
 
   const onLogout = async () => {
     await logout(); // ログアウトさせる
     router.push("/customer/logout"); // ログインページへ遷移させる
   };
-  const router = useRouter();
+  const router = useRouter()
+     ,  [calendar, setUsers] = useState([])
+     ,  urls = 'https://www.googleapis.com/calendar/v3/calendars/' + process.env.GMAIL + '/events?key=' + process.env.GOOGLEAPI;
+
+  useEffect(() => {
+    axios.get(urls)
+      .then(res => setUsers(res.data))
+      .catch(error => console.log(error));
+  }, [] );
 
 
-  handleClick = ({info}: {info:any}) => {
+  let myEvent:any = [];
 
+  if( 'items' in calendar ) {
+
+    let calendar_data:any = calendar
+      , calendar_item:any = calendar_data.items;
+
+      calendar_item.forEach(function(is_data:any) {
+        myEvent.push ({
+          'start': is_data.start.date,
+          'end': is_data.end.date,
+          'title': is_data.summary
+        }
+      )
+    });
   }
 
-  handleSelect = () => {
-  }
 
-  myEvents = [
-    {
-      googleCalendarId: process.env.GMAIL
-    }
-  ];
+  handleClick = ({info}: {info:any}) => {}
+
+  handleSelect = () => {}
 
   const renderForm = () => {
     return (
@@ -82,8 +101,8 @@ const Calendarpage: NextPage<{ user: any, myEvents:any, handleClick:any, handleS
         <div className={stylecommon.stylecalendar}>
           {renderForm}
           <FullCalendar
-            plugins={[interactionPlugin, timeGridPlugin, googleCalendarPlugin]}
-            initialView="timeGridWeek"
+            plugins={[interactionPlugin, timeGridPlugin, dayGridPlugin, googleCalendarPlugin]}
+            initialView="dayGridMonth"
             slotDuration="00:30:00" // 表示する時間軸の最小値
             selectable={true} // 日付選択可能
             allDaySlot={false} // alldayの表示設定
@@ -104,8 +123,7 @@ const Calendarpage: NextPage<{ user: any, myEvents:any, handleClick:any, handleS
             select={handleSelect}
             eventClick={handleClick}
             weekends={true} // 週末表示
-            googleCalendarApiKey= {process.env.GOOGLEAPI}
-            events={myEvents}
+            events={myEvent}
           />
         </div>
       </div>
