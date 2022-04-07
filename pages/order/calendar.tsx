@@ -15,7 +15,6 @@ import FullCalendar from "@fullcalendar/react";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction"; // needed for dayClick
-import googleCalendarPlugin from '@fullcalendar/google-calendar';
 
 import { INITIAL_EVENTS } from "../../utils/event-utils";
 
@@ -34,7 +33,7 @@ const Calendarpage: NextPage<{ user: any, myEvents:any, handleClick:any, handleS
   };
   const router = useRouter()
      ,  [calendar, setUsers] = useState([])
-     ,  urls = 'https://www.googleapis.com/calendar/v3/calendars/' + process.env.GMAIL + '/events?key=' + process.env.GOOGLEAPI;
+     ,  urls = 'https://www.googleapis.com/calendar/v3/calendars/' + process.env.GMAIL_USER + '/events?maxResults=9999&key=' + process.env.GOOGLEAPI;
 
   useEffect(() => {
     axios.get(urls)
@@ -51,10 +50,10 @@ const Calendarpage: NextPage<{ user: any, myEvents:any, handleClick:any, handleS
       , calendar_item:any = calendar_data.items;
 
       calendar_item.forEach(function(is_data:any) {
-        myEvent.push ({
-          'start': is_data.start.date,
-          'end': is_data.end.date,
-          'title': is_data.summary
+         myEvent.push ({
+          'start': is_data.start.dateTime,
+          'end': is_data.end.dateTime,
+          'title': is_data.visibility == 'public' ? is_data.summary : '非公開'
         }
       )
     });
@@ -100,7 +99,7 @@ const Calendarpage: NextPage<{ user: any, myEvents:any, handleClick:any, handleS
         <div className={stylecommon.stylecalendar}>
           {renderForm}
           <FullCalendar
-            plugins={[interactionPlugin, timeGridPlugin, dayGridPlugin, googleCalendarPlugin]}
+            plugins={[interactionPlugin, timeGridPlugin, dayGridPlugin]}
             initialView="dayGridMonth"
             slotDuration="00:30:00" // 表示する時間軸の最小値
             selectable={true} // 日付選択可能
