@@ -2,7 +2,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 import axios from "axios"
 import Layout from "../../components/layout";
-import { useCallback, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 import type { GetServerSideProps, NextPage } from "next";
 import nookies from "nookies";
@@ -14,7 +14,7 @@ import { logout} from "../../utils/firebase";
 import FullCalendar from "@fullcalendar/react";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import dayGridPlugin from "@fullcalendar/daygrid";
-import interactionPlugin from "@fullcalendar/interaction"; // needed for dayClick
+import interactionPlugin from "@fullcalendar/interaction";
 
 import { INITIAL_EVENTS } from "../../utils/event-utils";
 
@@ -23,17 +23,19 @@ import "@fullcalendar/daygrid/main.css";
 import "@fullcalendar/timegrid/main.css";
 
 import stylecommon from '../../styles/Common.module.css'
-import stylecalendar from '../../styles/Calendar.module.css'
 
-const Calendarpage: NextPage<{ user: any, myEvents:any, handleClick:any, handleSelect:any, selectInfo:any, eventsource:any }> = ({ user, myEvents, handleClick, handleSelect, selectInfo, eventsource }) => {
+const Calendarpage: NextPage<{ user: any, myEvents:any, handleClick:any, handleSelect:any, selectInfo:any, eventsource:any }> = ( { user } ) => {
 
+  // ログアウト
   const onLogout = async () => {
     await logout(); // ログアウトさせる
     router.push("/customer/logout"); // ログインページへ遷移させる
   };
+
+  // Googleカレンダー・FullCalendar連携
   const router = useRouter()
-     ,  [calendar, setUsers] = useState([])
-     ,  urls = 'https://www.googleapis.com/calendar/v3/calendars/' + process.env.GMAIL_USER + '/events?maxResults=9999&key=' + process.env.GOOGLEAPI;
+      , [calendar, setUsers] = useState([])
+      , urls = 'https://www.googleapis.com/calendar/v3/calendars/' + process.env.GMAIL_USER + '/events?maxResults=9999&key=' + process.env.GOOGLEAPI;
 
   useEffect(() => {
     axios.get(urls)
@@ -41,36 +43,45 @@ const Calendarpage: NextPage<{ user: any, myEvents:any, handleClick:any, handleS
       .catch(error => console.log(error));
   }, [] );
 
-
   let myEvent:any = [];
-
   if( 'items' in calendar ) {
-
     let calendar_data:any = calendar
       , calendar_item:any = calendar_data.items;
-
       calendar_item.forEach(function(is_data:any) {
-         myEvent.push ({
+        myEvent.push ({
           'start': is_data.start.dateTime,
           'end': is_data.end.dateTime,
-          'title': is_data.visibility == 'public' ? is_data.summary : '非公開'
+          'title': is_data.visibility == 'public' ? is_data.summary : '非公開',
+          'id': is_data.id
         }
       )
     });
   }
 
+  // イベント詳細を出力
+  const [calendardate, eventClick] = useState<any>('');
+  if(calendardate != '') {
+    console.log(calendardate.event);
+  }
 
-  handleClick = ({info}: {info:any}) => {}
+  // エントリー
+  const entryform = () => {
+    console.log('エントリーします');
+  }
 
-  handleSelect = () => {}
+  // 1日のスケジュールを表示
+  const daydateform = (daydate:any) => {
+    console.log(daydate.dayEl);
+  }
 
-  const renderForm = () => {
-    return (
-      <>
-        <div className={stylecommon.containerform}>
-        </div>
-      </>
-    )
+  // 一日の詳細を出力
+  const entryClick = (daydate:any) => {
+    let elements = daydate.dayEl.getElementsByClassName('fc-daygrid-event-harness');
+    if( elements.length == 0) {
+      entryform();
+    } else {
+      daydateform(daydate);
+    }
   }
 
   return (
@@ -97,7 +108,8 @@ const Calendarpage: NextPage<{ user: any, myEvents:any, handleClick:any, handleS
         </nav>
         <h2 className={stylecommon.title}>スケジュール一覧</h2>
         <div className={stylecommon.stylecalendar}>
-          {renderForm}
+          {entryform}
+          {daydateform}
           <FullCalendar
             plugins={[interactionPlugin, timeGridPlugin, dayGridPlugin]}
             initialView="dayGridMonth"
@@ -112,16 +124,16 @@ const Calendarpage: NextPage<{ user: any, myEvents:any, handleClick:any, handleS
               year: "numeric",
               month: "short",
               day: "numeric",
-            }} // タイトルに年月日を表示
+            }}
             businessHours={{
               daysOfWeek: [1, 2, 3, 4, 5],
               startTime: "0:00",
               endTime: "24:00",
             }}
-            select={handleSelect}
-            eventClick={handleClick}
             weekends={true} // 週末表示
             events={myEvent}
+            dateClick={entryClick}
+            eventClick={eventClick}
           />
         </div>
       </div>
