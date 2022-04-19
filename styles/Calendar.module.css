@@ -1,0 +1,36 @@
+.togglemenu {
+    display: flex;
+    flex-wrap: wrap;
+    width: 30%;
+    margin: 0 0 2rem auto;
+    justify-content: flex-end;
+}
+.togglemenu button {
+    width: 50% !important;
+}
+.togglemenu .open {
+    background: black;
+    color: white;
+    pointer-events: none;
+}
+.stylecalendar {
+    position: relative;
+    clear: both;
+    height: 100vh;
+    overflow: scroll;
+}
+.stylecalendar .stylecalendarinner {
+    position: absolute;
+    width: 100%;
+}
+.stylecalendar .open {
+    visibility: visible;
+}
+.stylecalendar .hidden {
+    visibility: hidden;
+}
+@media (max-width: 767px) {
+    .togglemenu {
+        width: 100% !important;
+    }
+}

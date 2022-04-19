@@ -23,8 +23,9 @@ import "@fullcalendar/daygrid/main.css";
 import "@fullcalendar/timegrid/main.css";
 
 import stylecommon from '../../styles/Common.module.css'
+import stylecalendar from '../../styles/Calendar.module.css'
 
-const Calendarpage: NextPage<{ user: any, myEvents:any, handleClick:any, handleSelect:any, selectInfo:any, eventsource:any }> = ( { user } ) => {
+const Calendarpage: NextPage<{ user: any }> = ( { user } ) => {
 
   // ログアウト
   const onLogout = async () => {
@@ -35,7 +36,7 @@ const Calendarpage: NextPage<{ user: any, myEvents:any, handleClick:any, handleS
   // Googleカレンダー・FullCalendar連携
   const router = useRouter()
       , [calendar, setUsers] = useState([])
-      , urls = 'https://www.googleapis.com/calendar/v3/calendars/' + process.env.GMAIL_USER + '/events?maxResults=9999&key=' + process.env.GOOGLEAPI;
+      , urls = 'https://www.googleapis.com/calendar/v3/calendars/' + process.env.GMAIL_USER + '/events?maxResults=3000&key=' + process.env.GOOGLEAPI;
 
   useEffect(() => {
     axios.get(urls)
@@ -84,6 +85,11 @@ const Calendarpage: NextPage<{ user: any, myEvents:any, handleClick:any, handleS
     }
   }
 
+  // Weekly Monthly
+  const [initial, setinitial] = useState(true);
+  const toggle = () => setinitial(!initial)
+  const initialViewString:any = initial ? 'timeGridWeek' : 'dayGridMonth';
+
   return (
     <Layout>
       <Head>
@@ -107,34 +113,67 @@ const Calendarpage: NextPage<{ user: any, myEvents:any, handleClick:any, handleS
           <Link href=""><a href="https://uemu-engineer.com/" target="_blank" rel="noreferrer">Nu-stack</a></Link>
         </nav>
         <h2 className={stylecommon.title}>スケジュール一覧</h2>
-        <div className={stylecommon.stylecalendar}>
+        <div className={stylecalendar.togglemenu}>
+          <button onClick={toggle} className={initial ? `${stylecalendar.open}` : `${stylecalendar.hidden}`}>Weekly</button>
+          <button onClick={toggle} className={initial ? `${stylecalendar.hidden}` : `${stylecalendar.open}`}>Monthly</button>
+        </div>
+        <div className={stylecalendar.stylecalendar}>
           {entryform}
           {daydateform}
-          <FullCalendar
-            plugins={[interactionPlugin, timeGridPlugin, dayGridPlugin]}
-            initialView="dayGridMonth"
-            slotDuration="00:30:00" // 表示する時間軸の最小値
-            selectable={true} // 日付選択可能
-            allDaySlot={false} // alldayの表示設定
-            nowIndicator={true}
-            editable={true}
-            locale='ja'
-            initialEvents={INITIAL_EVENTS}
-            titleFormat={{
-              year: "numeric",
-              month: "short",
-              day: "numeric",
-            }}
-            businessHours={{
-              daysOfWeek: [1, 2, 3, 4, 5],
-              startTime: "0:00",
-              endTime: "24:00",
-            }}
-            weekends={true} // 週末表示
-            events={myEvent}
-            dateClick={entryClick}
-            eventClick={eventClick}
-          />
+          <div className={initial ? `${stylecalendar.open} ${stylecalendar.stylecalendarinner}` : `${stylecalendar.hidden} ${stylecalendar.stylecalendarinner}`}>
+            <FullCalendar
+              plugins={[interactionPlugin, timeGridPlugin, dayGridPlugin]}
+              initialView='timeGridWeek'
+              slotDuration="00:30:00" // 表示する時間軸の最小値
+              selectable={true} // 日付選択可能
+              allDaySlot={false} // alldayの表示設定
+              nowIndicator={true}
+              editable={true}
+              locale='ja'
+              initialEvents={INITIAL_EVENTS}
+              titleFormat={{
+                year: "numeric",
+                month: "short",
+                day: "numeric",
+              }}
+              businessHours={{
+                daysOfWeek: [1, 2, 3, 4, 5],
+                startTime: "0:00",
+                endTime: "24:00",
+              }}
+              weekends={true} // 週末表示
+              events={myEvent}
+              dateClick={entryClick}
+              eventClick={eventClick}
+            />
+          </div>
+          <div className={initial ? `${stylecalendar.hidden} ${stylecalendar.stylecalendarinner}` : `${stylecalendar.open} ${stylecalendar.stylecalendarinner}`}>
+            <FullCalendar
+              plugins={[interactionPlugin, timeGridPlugin, dayGridPlugin]}
+              initialView='dayGridMonth'
+              slotDuration="00:30:00" // 表示する時間軸の最小値
+              selectable={true} // 日付選択可能
+              allDaySlot={false} // alldayの表示設定
+              nowIndicator={true}
+              editable={true}
+              locale='ja'
+              initialEvents={INITIAL_EVENTS}
+              titleFormat={{
+                year: "numeric",
+                month: "short",
+                day: "numeric",
+              }}
+              businessHours={{
+                daysOfWeek: [1, 2, 3, 4, 5],
+                startTime: "0:00",
+                endTime: "24:00",
+              }}
+              weekends={true} // 週末表示
+              events={myEvent}
+              dateClick={entryClick}
+              eventClick={eventClick}
+            />
+          </div>
         </div>
       </div>
     </Layout>
