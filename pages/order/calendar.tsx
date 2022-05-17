@@ -67,12 +67,21 @@ const Calendarpage: NextPage<{ user: any }> = ( { user } ) => {
 
   // エントリー
   const entryform = () => {
-    console.log('エントリーします');
+    if( user ) {
+      console.log('エントリーします');
+    } else {
+      console.log('ログインしてください');
+    }
+
   }
 
   // 1日のスケジュールを表示
   const daydateform = (daydate:any) => {
-    console.log(daydate.dayEl);
+    if( user ) {
+      console.log(daydate.dayEl);
+    } else {
+      console.log('ログインしてください');
+    }
   }
 
   // 一日の詳細を出力
