@@ -16,7 +16,7 @@ const EntryComplete: NextPage<{ user: any }> = (user) => {
 
   const onLogout = async () => {
     await logout(); // ログアウトさせる
-    router.push("/customer/logout"); // ログインページへ遷移させる
+    router.push("/customer/logout"); // ログアウトページへ遷移させる
   };
   return (
     <Layout>

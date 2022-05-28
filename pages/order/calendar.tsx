@@ -30,7 +30,7 @@ const Calendarpage: NextPage<{ user: any }> = ( { user } ) => {
   // ログアウト
   const onLogout = async () => {
     await logout(); // ログアウトさせる
-    router.push("/customer/logout"); // ログインページへ遷移させる
+    router.push("/customer/logout"); // ログアウトページへ遷移させる
   };
 
   // Googleカレンダー・FullCalendar連携
@@ -59,42 +59,22 @@ const Calendarpage: NextPage<{ user: any }> = ( { user } ) => {
     });
   }
 
-  // イベント詳細を出力
-  const [calendardate, eventClick] = useState<any>('');
-  if(calendardate != '') {
-    console.log(calendardate.event);
+  // 詳細を表示
+  const eventClick = (e:any) => {
+    alert(e.event._def.title);
   }
 
   // エントリー
-  const entryform = () => {
+  const entryClick = () => {
     if( user ) {
-      console.log('エントリーします');
+      alert('エントリーします');
     } else {
-      console.log('ログインしてください');
-    }
-
-  }
-
-  // 1日のスケジュールを表示
-  const daydateform = (daydate:any) => {
-    if( user ) {
-      console.log(daydate.dayEl);
-    } else {
-      console.log('ログインしてください');
+      alert('ログインしてください');
+      router.push("/customer/login"); // ログインページへ遷移させる
     }
   }
 
-  // 一日の詳細を出力
-  const entryClick = (daydate:any) => {
-    let elements = daydate.dayEl.getElementsByClassName('fc-daygrid-event-harness');
-    if( elements.length == 0) {
-      entryform();
-    } else {
-      daydateform(daydate);
-    }
-  }
-
-  // Weekly Monthly
+  // Weekly Monthly トグル
   const [initial, setinitial] = useState(true);
   const toggle = () => setinitial(!initial)
   const initialViewString:any = initial ? 'timeGridWeek' : 'dayGridMonth';
@@ -127,8 +107,6 @@ const Calendarpage: NextPage<{ user: any }> = ( { user } ) => {
           <button onClick={toggle} className={initial ? `${stylecalendar.hidden}` : `${stylecalendar.open}`}>Monthly</button>
         </div>
         <div className={stylecalendar.stylecalendar}>
-          {entryform}
-          {daydateform}
           <div className={initial ? `${stylecalendar.open} ${stylecalendar.stylecalendarinner}` : `${stylecalendar.hidden} ${stylecalendar.stylecalendarinner}`}>
             <FullCalendar
               plugins={[interactionPlugin, timeGridPlugin, dayGridPlugin]}
