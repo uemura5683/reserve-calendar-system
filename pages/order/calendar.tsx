@@ -85,6 +85,7 @@ const Calendarpage: NextPage<{ user: any }> = ( { user } ) => {
         <title>Calendar</title>
         <meta name="description" content="Calendar" />
         <link rel="icon" href="/favicon.ico" />
+        <link rel="stylesheet" href="/styles/page/calendar.css"></link>
       </Head>
       <div className={stylecommon.container}>
         <nav className={stylecommon.nav}>
@@ -107,7 +108,11 @@ const Calendarpage: NextPage<{ user: any }> = ( { user } ) => {
           <button onClick={toggle} className={initial ? `${stylecalendar.hidden}` : `${stylecalendar.open}`}>Monthly</button>
         </div>
         <div className={stylecalendar.stylecalendar}>
-          <div className={initial ? `${stylecalendar.open} ${stylecalendar.stylecalendarinner}` : `${stylecalendar.hidden} ${stylecalendar.stylecalendarinner}`}>
+          <div
+            className={initial
+              ? `${stylecalendar.open} ${stylecalendar.stylecalendarinner}`
+              : `${stylecalendar.hidden} ${stylecalendar.stylecalendarinner}`}
+          >
             <FullCalendar
               plugins={[interactionPlugin, timeGridPlugin, dayGridPlugin]}
               initialView='timeGridWeek'
@@ -134,7 +139,11 @@ const Calendarpage: NextPage<{ user: any }> = ( { user } ) => {
               eventClick={eventClick}
             />
           </div>
-          <div className={initial ? `${stylecalendar.hidden} ${stylecalendar.stylecalendarinner}` : `${stylecalendar.open} ${stylecalendar.stylecalendarinner}`}>
+          <div
+            className={initial
+              ? `${stylecalendar.hidden} ${stylecalendar.stylecalendarinner}`
+              : `${stylecalendar.open} ${stylecalendar.stylecalendarinner}`}
+          >
             <FullCalendar
               plugins={[interactionPlugin, timeGridPlugin, dayGridPlugin]}
               initialView='dayGridMonth'

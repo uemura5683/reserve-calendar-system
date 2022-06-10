@@ -1,0 +1,13 @@
+/*********************************
+* base.css
+*********************************/
+
+:root {
+  --red: #e50914;
+  --blue: #211A6D;
+  --white: #fff;
+  --black: #333;
+  --gray: #cdcdcd;
+  --gray_two: #555555;
+  --clear: transparent;
+}

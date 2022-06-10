@@ -16,7 +16,7 @@
 .stylecalendar {
     position: relative;
     clear: both;
-    height: 100vh;
+    height: calc(100vh - 360px);
     overflow: scroll;
 }
 .stylecalendar .stylecalendarinner {
