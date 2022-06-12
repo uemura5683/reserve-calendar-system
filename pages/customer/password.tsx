@@ -13,7 +13,6 @@ import { firebaseAdmin } from "../../firebaseAdmin";
 import { getFirebaseAuth, password,logout } from "../../utils/firebase";
 
 import stylecommon from '../../styles/Common.module.css'
-import stylecustomer from '../../styles/Customer.module.css'
 
 const LoginPage: NextPage<{ user: any }> = ({ user }) => {
   const router = useRouter();
@@ -28,14 +27,14 @@ const LoginPage: NextPage<{ user: any }> = ({ user }) => {
     let auth = getFirebaseAuth();
     if( email != '' ) {
       try {
-        await password(email); // email・passwordを使ってログイン
-        router.push("/customer/passwordcomplete"); //トップページへ遷移させる
+        await password(email); // 新しいパスワードを入力する
+        router.push("/customer/passwordcomplete"); //パスワードリセット完了ページに遷移する
       } catch( err ) {
-        alert('email情報が正しくありません');
+        alert('Eメール情報が正しくありません');
       }
     } else {
       if(email == '') {
-        alert('emailを入力してください。');
+        alert('メールアドレスを入力してください');
       }
     }
   };

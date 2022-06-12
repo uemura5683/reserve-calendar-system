@@ -10,7 +10,6 @@ import { logout} from "../../utils/firebase";
 import { firebaseAdmin } from "../../firebaseAdmin";
 
 import stylecommon from '../../styles/Common.module.css'
-import stylemypage from '../../styles/Mypage.module.css'
 
 const EntryComplete: NextPage<{ user: any }> = (user) => {
   const router = useRouter();

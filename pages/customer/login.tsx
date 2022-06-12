@@ -28,16 +28,16 @@ const LoginPage: NextPage<{ user: any }> = (user) => {
     if( email != '' && password != '' ) {
       try {
         await login(email, password); // email・passwordを使ってログイン
-        router.push("/mypage"); //トップページへ遷移させる
+        router.push("/mypage"); //マイページへ遷移させる
       } catch( err ) {
         alert('ログイン情報が正しくありません');
       }
     } else {
       if(email == '') {
-        alert('emailを入力してください。');
+        alert('メールアドレスを入力してください');
       }
       if(password == '') {
-        alert('passwordを入力してください。');
+        alert('パスワードを入力してください');
       }  
     }
   };

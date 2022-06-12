@@ -28,7 +28,7 @@ const LoginPage: NextPage<{ user: any }> = ({ user }) => {
     if( mailaddress != '' ) {
       try {
         mailaddressupdate(auth, mailaddress);
-        router.push("/mypage/mailaddresscomplete"); //トップページへ遷移させる
+        router.push("/mypage/mailaddresscomplete"); //アドレス変更完了ページへ遷移させる
       } catch( err ) {
         alert('送信失敗しました。');
       }

@@ -102,11 +102,17 @@
   height: 40px;
   line-height: 40px;
 }
+.inputbutton:hover {
+  background-color: #333333;
+  color: #ffffff;
+}
 .inputbutton a {
   text-decoration: none;
   display: block;
 }
-
+.inputbutton:hover a{
+  color: #ffffff;
+}
 /**
 * utility
 **/

@@ -13,7 +13,6 @@ import { firebaseAdmin } from "../../firebaseAdmin";
 import { getFirebaseAuth, passwordupdate, logout } from "../../utils/firebase";
 
 import stylecommon from '../../styles/Common.module.css'
-import stylemypage from '../../styles/Mypage.module.css'
 
 const LoginPage: NextPage<{ user: any }> = ({ user }) => {
   const router = useRouter();
@@ -28,12 +27,12 @@ const LoginPage: NextPage<{ user: any }> = ({ user }) => {
     if( password != '' ) {
       try {
         passwordupdate(getFirebaseAuth(), password);
-        router.push("/mypage/passwordcomplete"); //トップページへ遷移させる
+        router.push("/mypage/passwordcomplete"); //パスワード変更完了ページへ遷移させる
       } catch( err ) {
-        alert('送信失敗しました。');
+        alert('送信失敗しました');
       }
     } else {
-      alert('パスワードを入力してください。');
+      alert('パスワードを入力してください');
     }
   };
   return (
