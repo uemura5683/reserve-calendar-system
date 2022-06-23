@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import Link from 'next/link'
-export const siteTitle = 'Nu-Stack | フロントエンドエンジニアポートフォリオサイト';
+export const siteTitle = '予約管理システム';
 import styles from '../styles/Common.module.css'
 
 function Layout({ children
@@ -13,7 +13,7 @@ function Layout({ children
         <link rel="icon" href="/favicon.ico" />
         <meta
           name="description"
-          content="フロントエンドエンジニアのうえむーのポートフォリオサイトサイトです。実績情報・スキル情報・成果物などを展開して行きます。"
+          content="予約管理システムのサイトです。"
         />
         <meta
           property="og:image"

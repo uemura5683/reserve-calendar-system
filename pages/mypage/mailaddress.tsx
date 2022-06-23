@@ -56,7 +56,7 @@ const LoginPage: NextPage<{ user: any }> = ({ user }) => {
                 <Link href="/customer/signup">会員登録</Link>
               </>
           ) }
-          <Link href=""><a href="https://uemu-engineer.com/" target="_blank" rel="noreferrer">Nu-stack</a></Link>
+          <Link href=""><a href="https://uemu-engineer.com/" target="_blank" rel="noreferrer">U-stack</a></Link>
         </nav>
         <h2 className={stylecommon.title}>メールアドレス変更</h2>
         <form className={stylecommon.formcont} onSubmit={onSubmit}>
