@@ -2,7 +2,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 import Layout from "../../components/layout";
 
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import type { FormEvent } from "react";
 
 import type { GetServerSideProps, NextPage } from "next";
@@ -41,6 +41,7 @@ const LoginPage: NextPage<{ user: any }> = (user) => {
       }  
     }
   };
+
   return (
     <Layout>
       <Head>
