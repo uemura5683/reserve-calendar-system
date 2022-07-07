@@ -24,8 +24,7 @@ const Calendarpage: NextPage<{ user: any }> = ( { user } ) => {
     await logout(); // ログアウトさせる
     router.push("/customer/logout"); // ログアウトページへ遷移させる
   };
-
-  console.log(user);
+  
   return (
     <Layout>
       <Head>
