@@ -68,7 +68,6 @@ const Calendar = (user:any) => {
   const initialViewString:any = initial ? 'timeGridWeek' : 'dayGridMonth';
 
 
-  const [modalIsOpen,setIsOpen] = useState(false);
 
   // エントリー
   const entryClick = () => {
@@ -86,17 +85,80 @@ const Calendar = (user:any) => {
     }
   }
 
-  function OrderConfirm(props:any) {
-    function closeModal(){
+  const closeModal = () => {
+    const modalIsOpen = false;
+    ReactDOM.render(
+      <React.StrictMode>
+        <OrderConfirm isOpen={modalIsOpen} />
+      </React.StrictMode>,
+      document.getElementById("modalArea")
+    );
+  }
 
-    }
+  function OrderConfirm(props:any) {
     return(
       <>
         { props.isOpen == true ? (
             <>
               <div className={stylecalendar.calendarmodal}>
-                エントリーします。
-                <button onClick={closeModal}>close</button>
+                予約してください
+
+                <form className={stylecalendar.ordercontent}>
+                  <div className={stylecalendar.ordercontentblock}>
+                    <label className={stylecalendar.ordercontentlabel}>タイトル</label>
+                    <input
+                      className={stylecalendar.ordercontentinput}
+                      type="text"
+                      placeholder="タイトルを入力してください"
+                      id="name"
+                      name="name"
+                      required
+                    />
+                  </div>
+                  <div className={stylecalendar.ordercontentblock}>
+                  <label className={stylecalendar.ordercontentlabel}>場所</label>
+                    <input
+                      className={stylecalendar.ordercontentinput}
+                      type="text"
+                      placeholder="場所を入力してください"
+                      id="email"
+                      name="email"
+                      required
+                    />
+                  </div>
+                  <div className={stylecalendar.ordercontentblock}>
+                    <label className={stylecalendar.ordercontentlabel}>詳細</label>
+                    <input
+                      className={stylecalendar.ordercontentinput}
+                      type="text"
+                      placeholder="詳細を入力してください"
+                      id="title"
+                      name="title"
+                      required
+                    />
+                  </div>
+                  <div className={stylecalendar.ordercontentblock}>
+                    <label className={stylecalendar.ordercontentlabel}>開始時間</label>
+                    <select className={stylecalendar.pulldown}>
+                      <option value="0">00:00</option>
+                    </select>
+                  </div>
+                  <div className={stylecalendar.ordercontentblock}>
+                    <label className={stylecalendar.ordercontentlabel}>終了時間</label>
+                    <select className={stylecalendar.pulldown}>
+                      <option value="0">00:00</option>
+                    </select>
+                  </div>
+                  <div className={stylecalendar.btnblock}>
+                    <button
+                      className={stylecalendar.btn}
+                      type="submit"
+                    >
+                      送信内容を確認する
+                    </button>
+                    <button onClick={closeModal}>close</button>
+                  </div>
+                </form>
               </div>
               <div className={stylecalendar.calendarmodalbg} onClick={closeModal}></div>
             </>
@@ -106,10 +168,42 @@ const Calendar = (user:any) => {
     )  
   }
 
-
-  // 詳細を表示
   const eventClick = (e:any) => {
+    const modalIsOpen = true;
+    ReactDOM.render(
+      <React.StrictMode>
+        <EventDetail isOpen={modalIsOpen} data={e.event._def} />
+      </React.StrictMode>,
+      document.getElementById("modalArea")
+    );
+  }
 
+  const closeEventModal = () => {
+    const modalIsOpen = false;
+    ReactDOM.render(
+      <React.StrictMode>
+        <OrderConfirm isOpen={modalIsOpen} />
+      </React.StrictMode>,
+      document.getElementById("modalArea")
+    );
+  }
+  
+  function EventDetail(props:any) {
+    console.log(props.data);
+    return(
+      <>
+        { props.isOpen == true ? (
+            <>
+              <div className={stylecalendar.calendarmodal}>
+                <h3>{props.data.title}</h3>
+                <button onClick={closeEventModal}>close</button>
+              </div>
+              <div className={stylecalendar.calendarmodalbg} onClick={closeEventModal}></div>
+            </>
+          ) : null
+        }
+      </>
+    )  
   }
 
   return (

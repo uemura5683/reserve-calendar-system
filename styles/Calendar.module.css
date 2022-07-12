@@ -30,6 +30,28 @@
     visibility: hidden;
 }
 
+.ordercontent {}
+.ordercontent .ordercontentblock {
+    display: block;
+    margin: 0 0 10px;
+}
+.ordercontent .ordercontentblock .ordercontentlabel {
+    display: block;    
+}
+.ordercontent .ordercontentblock .ordercontentinput,
+.ordercontent .ordercontentblock .pulldown {
+    width: 100%;
+    height: 40px;
+}
+.ordercontent .btnblock {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.ordercontent .btnblock button {
+    width: 230px;
+    margin: 0 10px;
+}
 .calendarmodal {
     position: fixed;
     top: 50%;
@@ -38,6 +60,7 @@
     background: white;
     transform: translate(-50%, -50%);
     padding: 10px;
+    width: 50%;
 }
 .calendarmodalbg {
     position: fixed;
@@ -51,6 +74,12 @@
 }
 
 @media (max-width: 767px) {
+    .calendarmodal {
+        width: 90%;
+    }
+    .ordercontent .btnblock button {
+        margin: 0 0 10px;
+    }
     .togglemenu {
         width: 100% !important;
     }

@@ -22,3 +22,5 @@ https://log.pocka.io/ja/posts/typescript-builtin-type-functions/
 https://fullcalendar.io/docs/react
 
 https://github.com/N-Iwata/react-fullcalender/blob/master/src/App.js
+
+https://developers.google.com/calendar/api/v3/reference/events/insert
