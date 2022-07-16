@@ -18,8 +18,10 @@ const LoginPage: NextPage<{ user: any }> = ({ user }) => {
   const router = useRouter();
   const [email, setEmail] = useState("");
 
+  // ログアウト
   const onLogout = async () => {
     await logout(); // ログアウトさせる
+    router.push("/customer/logout"); // ログアウトページへ遷移させる
   };
 
   const onSubmit = async (event: FormEvent) => {

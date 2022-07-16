@@ -1,8 +1,7 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import axios from "axios"
 import Layout from "../../components/layout";
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 import type { GetServerSideProps, NextPage } from "next";
 import nookies from "nookies";
@@ -15,8 +14,6 @@ import stylecommon from '../../styles/Common.module.css'
 import Calendar from '../../components/order/calendar'
 
 const Calendarpage: NextPage<{ user: any }> = ( { user } ) => {
-
-  // Googleカレンダー・FullCalendar連携
   const router = useRouter();
 
   // ログアウト

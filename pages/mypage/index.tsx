@@ -15,6 +15,7 @@ import stylemypage from '../../styles/Mypage.module.css'
 const Mypage: NextPage<{ user: any }> = ({ user }) => {
   const router = useRouter();
 
+  // ログアウト
   const onLogout = async () => {
     await logout(); // ログアウトさせる
     router.push("/customer/logout"); // ログアウトページへ遷移させる

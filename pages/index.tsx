@@ -15,6 +15,7 @@ import styleindex from '../styles/Home.module.css'
 const IndexPage: NextPage<{ user: any }> = (user) => {
   const router = useRouter();
 
+  // ログアウト
   const onLogout = async () => {
     await logout(); // ログアウトさせる
     router.push("/customer/logout"); // ログアウトページへ遷移させる

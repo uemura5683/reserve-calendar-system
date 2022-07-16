@@ -68,7 +68,6 @@ const Calendar = (user:any) => {
   const initialViewString:any = initial ? 'timeGridWeek' : 'dayGridMonth';
 
 
-
   // エントリー
   const entryClick = () => {
     if( user.data ) {
@@ -101,8 +100,7 @@ const Calendar = (user:any) => {
         { props.isOpen == true ? (
             <>
               <div className={stylecalendar.calendarmodal}>
-                予約してください
-
+                <h2 className={stylecalendar.title}>予約フォーム設定</h2>
                 <form className={stylecalendar.ordercontent}>
                   <div className={stylecalendar.ordercontentblock}>
                     <label className={stylecalendar.ordercontentlabel}>タイトル</label>
@@ -189,13 +187,16 @@ const Calendar = (user:any) => {
   }
   
   function EventDetail(props:any) {
-    console.log(props.data);
     return(
       <>
         { props.isOpen == true ? (
             <>
               <div className={stylecalendar.calendarmodal}>
-                <h3>{props.data.title}</h3>
+                <h2 className={stylecalendar.title}>予約内容</h2>
+                <dl className={stylecalendar.orderlist}>
+                  <dt className={stylecalendar.orderlisttitle}>タイトル</dt>
+                  <dd className={stylecalendar.orderlistname}>{props.data.title}</dd>
+                </dl>
                 <button onClick={closeEventModal}>close</button>
               </div>
               <div className={stylecalendar.calendarmodalbg} onClick={closeEventModal}></div>
